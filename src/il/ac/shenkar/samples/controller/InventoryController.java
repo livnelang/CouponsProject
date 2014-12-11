@@ -1,6 +1,7 @@
 package il.ac.shenkar.samples.controller;
 
 
+import il.ac.shenkar.samples.model.Coupon;
 import il.ac.shenkar.samples.model.CouponException;
 import il.ac.shenkar.samples.model.InventoryException;
 import il.ac.shenkar.samples.model.MySQLCouponsDAO;
@@ -50,20 +51,29 @@ public class InventoryController extends HttpServlet {
 			}*/ catch (CouponException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
-			
-			
-		} else if(path.endsWith("addproduct"))
-		{
-			
-			dispatcher = getServletContext().getRequestDispatcher("/addproduct.jsp");
-			
-			
-			
-			
-			
+			}		
 		}
+		
+		else if(path.endsWith("addproduct"))
+		{
+			String name = request.getParameter("c_name");
+			String desc = request.getParameter("c_des");
+			int _id = Integer.parseInt(request.getParameter("c_id"));
+			Coupon c1 = new Coupon(_id,name,desc);
+			
+			try {
+				request.setAttribute("addcoupon", MySQLCouponsDAO.getInstance().addCoupon(c1));
+			} catch (CouponException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			dispatcher = getServletContext().getRequestDispatcher("/formentry.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+	/*	else if(path.endsWith("formentry")) {
+			dispatcher = getServletContext().getRequestDispatcher("/formentry.jsp");
+		}*/
 		
 		else {
 			dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
