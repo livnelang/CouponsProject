@@ -13,7 +13,7 @@
 	<th>id</th><th>price</th><th>name</th>
 </tr>
 <%
-Collection products = (Collection)request.getAttribute("products");
+Collection products = (Collection)request.getAttribute("coupons");
 Iterator iterator = products.iterator();
 while(iterator.hasNext())
 {

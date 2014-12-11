@@ -36,12 +36,12 @@ public class InventoryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getPathInfo();
 		RequestDispatcher dispatcher = null;
-		if(path.endsWith("products"))
+		if(path.endsWith("coupons"))
 		{
 			
 			try {
-				request.setAttribute("products", MySQLCouponsDAO.getInstance().getCoupons());
-				dispatcher = getServletContext().getRequestDispatcher("/products.jsp");
+				request.setAttribute("coupons", MySQLCouponsDAO.getInstance().getCoupons());
+				dispatcher = getServletContext().getRequestDispatcher("/coupons.jsp");
 				dispatcher.forward(request, response);
 			}
 			/*catch(InventoryException e) {
@@ -58,10 +58,16 @@ public class InventoryController extends HttpServlet {
 		{
 			
 			dispatcher = getServletContext().getRequestDispatcher("/addproduct.jsp");
-
 			
 			
 			
+			
+			
+		}
+		
+		else {
+			dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+			dispatcher.forward(request, response);
 		}
 		
 	}
