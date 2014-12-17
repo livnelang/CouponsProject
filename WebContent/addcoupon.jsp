@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=windows-1255"
+    import="java.util.*,il.ac.shenkar.samples.model.*"
+    pageEncoding="windows-1255"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +10,7 @@
     <title>Coupons Project</title>
 
     <!-- Bootstrap-CSS & General CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/CouponsProject/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -47,6 +50,63 @@
 </nav>
 
 
+			
+	<!--  Form for Adding A Coupon -->
+	<form class="form-horizontal" role="form" action="/CouponsProject/controller/addcoupon" method="get">
+	<div class="form-group">
+      <label for="id" class="col-sm-2 control-label">Coupon ID</label>
+      <div class="col-sm-2">
+         <input type="text" class="form-control" name="c_id" 
+            placeholder="Enter random id">
+      </div>
+   </div>		
+   <div class="form-group">
+      <label for="firstname" class="col-sm-2 control-label">Coupon Name</label>
+      <div class="col-sm-2">
+         <input type="text" class="form-control" name="c_name" 
+            placeholder="Enter Name">
+      </div>
+   </div>
+   <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">Description</label>
+      <div class="col-sm-2">
+         <input type="text" class="form-control" name="c_des" 
+            placeholder="Enter Coupon Description">
+      </div>
+   </div>
+
+   <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+         <button type="submit" class="btn btn-default">Add Coupon</button>
+      </div>
+   </div>
+</form>
+			
+			<%
+			boolean added = false;
+			try{		
+			added = (boolean)request.getAttribute("addcoupon");
+			}
+			
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			if(added)
+			{
+				%>
+				<h1>coupon was added</h1>
+			<% 
+			}
+			else 
+			{
+				%>
+				<h1>coupon wasnt added</h1>
+				<% 
+			}
+			
+			%>
+
+
 
 <!-- The Footer Bar -->
 <div class="navbar navbar-default navbar-fixed-bottom">
@@ -59,7 +119,6 @@
    	  </a>
         <p class="navbar-text">2014 Java EE Project</p>
         <button type="button" class="navbar-btn btn-info btn pull-right">About</button>
-        <span class="badge pull-right">3</span>
       </div>	
     </div>
 

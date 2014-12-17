@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/controller/*")
 public class InventoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static int count = 0;
+	private static String client_name=null;
+	private static String client_id=null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,6 +41,13 @@ public class InventoryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getPathInfo();
 		RequestDispatcher dispatcher = null;
+		if(client_name==null) {
+			client_name = request.getCookies()[0].getName();
+		}
+		count++;
+		
+		
+		
 		if(path.endsWith("coupons"))
 		{
 			
@@ -54,7 +65,7 @@ public class InventoryController extends HttpServlet {
 			}		
 		}
 		
-		else if(path.endsWith("addproduct"))
+		else if(path.endsWith("addcoupon"))
 		{
 			String name = request.getParameter("c_name");
 			String desc = request.getParameter("c_des");
@@ -63,17 +74,28 @@ public class InventoryController extends HttpServlet {
 			
 			try {
 				request.setAttribute("addcoupon", MySQLCouponsDAO.getInstance().addCoupon(c1));
+				dispatcher = getServletContext().getRequestDispatcher("/addcoupon.jsp");
+				dispatcher.forward(request, response);
 			} catch (CouponException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			dispatcher = getServletContext().getRequestDispatcher("/formentry.jsp");
-			dispatcher.forward(request, response);
+			
 		}
 		
-	/*	else if(path.endsWith("formentry")) {
-			dispatcher = getServletContext().getRequestDispatcher("/formentry.jsp");
-		}*/
+		else if(path.endsWith("getCookies"))
+		{
+			PrintWriter out = response.getWriter();
+			Cookie[] vec = request.getCookies();
+			//int l = vec.length;
+			out.println("Counter: ");
+			out.println(count);			
+			out.flush();
+			
+		}
+		
+		
+
 		
 		else {
 			dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");

@@ -26,10 +26,11 @@
    <div>
       <ul class="nav navbar-nav">
          <li class="active"><a href="/CouponsProject/controller/coupons">Watch Your Coupons</a></li>
-         <li><a href="#">Add Coupon</a></li>
+         <li><a href="/CouponsProject/addcoupon.jsp">Add Coupon</a></li>
          <li><a href="#">Get Coupon</a></li>
+         <li><a href="/CouponsProject/controller/getCookies">Get Cookies</a></li>
          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="/CouponsProject/controller/addcoupon" class="dropdown-toggle" data-toggle="dropdown">
                Java 
                <b class="caret"></b>
             </a>
