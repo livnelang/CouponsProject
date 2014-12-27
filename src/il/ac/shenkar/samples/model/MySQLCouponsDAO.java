@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +20,8 @@ import java.util.List;
 
 
 
+
+import java.util.Map;
 
 import javax.transaction.SystemException;
 import javax.transaction.Transaction;
@@ -35,6 +38,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
  */
 public class MySQLCouponsDAO implements ICouponsDAO
 {
+	private Map<Integer,Coupon> coupons;
 
 	
     static
@@ -64,7 +68,9 @@ public class MySQLCouponsDAO implements ICouponsDAO
         return instance;
     }
 
-    private MySQLCouponsDAO() {}
+    private MySQLCouponsDAO() {
+    	coupons = new HashMap<Integer, Coupon>();
+    }
 
     /**
      * Hibernate getCoupons
@@ -78,13 +84,15 @@ public class MySQLCouponsDAO implements ICouponsDAO
     			//creating a new session for getting all products
     			Session anotherSession = factory.openSession();
     			anotherSession.beginTransaction();
-    			List products = anotherSession.createQuery("from Coupon").list();
+    			List<Coupon> products = anotherSession.createQuery("from Coupon").list();
     			System.out.println("There are " + products.size() + " product(s)");
     			Iterator i = products.iterator();
     			while(i.hasNext()) 
     			{
     				//System.out.println(i.next());
-    				coupon_array.add((Coupon) i.next());
+    				Coupon c = (Coupon) i.next();
+    				coupon_array.add(c);
+    				coupons.put(c.getId(),c);
     			}
     			anotherSession.close();	
     			return coupon_array;

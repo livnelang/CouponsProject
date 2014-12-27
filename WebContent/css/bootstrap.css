@@ -183,6 +183,7 @@ optgroup {
 table {
   border-spacing: 0;
   border-collapse: collapse;
+  
 }
 td,
 th {
@@ -4162,26 +4163,25 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-default {
   background-color: #f8f8f8;
-  border-color: #e7e7e7;
 }
 .navbar-default .navbar-brand {
-  color: #777;
+  color: #ebebeb;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-  color: #5e5e5e;
+  color: #ebebeb;
   background-color: transparent;
 }
 .navbar-default .navbar-text {
-  color: #777;
+  color: #ebebeb;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #777;
+  color: #ebebeb;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #333;
-  background-color: transparent;
+  color: #ebebeb;
+  background-color: #485563;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
@@ -4193,7 +4193,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .disabled > a:hover,
 .navbar-default .navbar-nav > .disabled > a:focus {
   color: #ccc;
-  background-color: transparent;
+  background-color: #e7e7e7;
 }
 .navbar-default .navbar-toggle {
   border-color: #ddd;
@@ -4620,10 +4620,18 @@ a.badge:focus {
   margin-left: 3px;
 }
 .jumbotron {
-  padding: 30px 15px;
-  margin-bottom: 30px;
+  position:relative;
+  margin:0px auto;
+  width:600px;
+  padding-top:50px;
+  margin-bottom: 10px;
   color: inherit;
   background-color: #eee;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  text-align: center;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -5073,6 +5081,7 @@ a.list-group-item-danger.active:focus {
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;

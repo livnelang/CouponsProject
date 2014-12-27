@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=windows-1255"
+    import="java.util.*,il.ac.shenkar.samples.model.*" 
+    pageEncoding="windows-1255"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,14 +10,14 @@
     <title>Coupons Project</title>
 
     <!-- Bootstrap-CSS & General CSS -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </head>
-
+  
 <!--  Body Content -->
   <body>
   <header>
@@ -37,15 +40,37 @@
    </div>
 </nav>
 </header>
-  
-<!-- 
-<div class="jumbotron">
-  <h1>Welcome </h1>
-  <p>This site offers special Coupons for purchasing </p>
-  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
-</div>
- -->
 
-<!--  <div class="entryclass"></div> -->    
+<!-- BootStrap Panel Table Showing Our Coupons -->
+<div class="panel panel-default">
+   <div class="panel-heading">My Coupons</div>
+   <table class="table">
+      <th class="col-sm-1">Coupon Name</th><th  class="col-sm-1">Description</th class="col-sm-1"><th class="col-sm-1">Quantity</th>
+      <% 
+      	ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+      	System.out.println("inside mycoupons.jsp: "+cart);
+      	Map<Coupon,ShoppingCartLine> lines =  cart.getLines();
+      	//Iterator it = lines	.iterator();
+      	
+		for(ShoppingCartLine value : lines.values())
+		{
+		//ShoppingCartLine sp = (ShoppingCvalue;
+		System.out.println("it: "+value);
+		
+		%>
+		<tr>
+		<td><%= value.getC1().getName() %></td>
+		<td><%= value.getC1().getDescription() %></td>
+		<td><%= value.getAmount() %></td>
+		</tr>
+	
+		<% 
+		}
+
+	 %>
+
+   </table>
+</div>
+
   </body>
 </html>

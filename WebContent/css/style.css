@@ -1,13 +1,30 @@
 body {
-	background-color: #599676;
+	background-color: #4E5D6C;
+	
 }
 
 .entryclass{
 	width:800px;
 	height:354px;
 	margin:0 auto;
-	background: url("../img/coupons_logo.png");
-	background-repeat: no-repeat;
   	border-radius: 5px;
+	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+	-moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
 	
 }
+
+.navbar {
+	background-color:#4E5D6C;
+	color: black;	
+}
+.navbar-right {
+    float: right !important;
+    margin-right: 15px;
+}
+.white {
+	color: #ebebeb;
+	background:none;
+	border:none;
+}
+
