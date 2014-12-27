@@ -41,9 +41,7 @@ public class InventoryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getPathInfo();
 		RequestDispatcher dispatcher = null;
-		if(client_name==null) {
-			client_name = request.getCookies()[0].getName();
-		}
+
 		count++;
 		
 		
