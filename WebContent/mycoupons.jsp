@@ -49,7 +49,8 @@
       <% 
       	ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
       	System.out.println("inside mycoupons.jsp: "+cart);
-      	Map<Coupon,ShoppingCartLine> lines =  cart.getLines();
+      	
+      	Map<Integer,ShoppingCartLine> lines =  cart.getLines();
       	//Iterator it = lines	.iterator();
       	
 		for(ShoppingCartLine value : lines.values())

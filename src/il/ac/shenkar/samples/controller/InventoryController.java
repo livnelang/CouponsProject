@@ -135,6 +135,15 @@ public class InventoryController extends HttpServlet {
 			
 		}
 		
+		else if(path.endsWith("mycartentry")) {
+	
+			
+			// Going to turn it to mycoupons.jsp page and show purchased coupons
+						dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
+						dispatcher.forward(request, response);
+			
+		}
+		
 		
 		/*
 		else if(path.endsWith("getCookies"))

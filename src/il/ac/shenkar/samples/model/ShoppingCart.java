@@ -1,10 +1,11 @@
 package il.ac.shenkar.samples.model;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class ShoppingCart {
-	private Map<Coupon,ShoppingCartLine> lines;
+	private Map<Integer,ShoppingCartLine> lines = new Hashtable<Integer,ShoppingCartLine>();
 
 	/**
 	 * ShoppingCart Constructor
@@ -13,7 +14,6 @@ public class ShoppingCart {
 	public ShoppingCart() 
 	{
 		super();
-		this.lines = new HashMap<Coupon, ShoppingCartLine>();
 	}
 	
 	/**
@@ -22,15 +22,19 @@ public class ShoppingCart {
 	 */
 	public void addShoppingCartLine(Coupon c)
 	{
-		if(lines.containsKey(c)) {
+		if(lines.containsKey(c.getId())) {
 			//a shopping cart line for this product already exists
-			ShoppingCartLine line = lines.get(c);
+			System.out.println("Coupon already added");
+			ShoppingCartLine line = lines.get(c.getId());
 			line.setAmount(line.getAmount()+1);			
 		}
 		else {
 			//we need to create a new shopping cart line
+			System.out.println("New Coupon added");
+			
 			ShoppingCartLine line = new ShoppingCartLine(c, 1);
-			lines.put(c, line);
+			lines.put(c.getId(), line);
+			System.out.println(lines.size());
 		}
 	}
 	
@@ -38,7 +42,7 @@ public class ShoppingCart {
 	 * return all coupons lines
 	 * @return
 	 */
-	public Map<Coupon,ShoppingCartLine> getLines() {
+	public Map<Integer,ShoppingCartLine> getLines() {
 		return this.lines;
 	}
 	
