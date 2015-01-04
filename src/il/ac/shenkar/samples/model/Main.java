@@ -13,7 +13,7 @@ public class Main {
         	
           //  dao.addCoupon(new Coupon(12544,"Here","We Go"));
         	//	dao.getCoupon(12545);
-        	    dao.updateCoupon(new Coupon(12545, "this is ","sparta"));   // Executes updateCoupon(Coupon)
+        	 //   dao.updateCoupon(new Coupon(12545, "this is ","sparta"));   // Executes updateCoupon(Coupon)
 
          //   System.out.println(dao.getCoupons());   			 	 		  // Executes getCoupons()
             boolean removed_coupon = dao.deleteCoupon(12546);

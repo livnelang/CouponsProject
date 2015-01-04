@@ -7,63 +7,58 @@
     <title>Coupons Project</title>
 
     <!-- Bootstrap-CSS & General CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-  </head>
-
-<header>
+  	</head>
+  	
+<body>
+  <header>
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand" href="/CouponsProject/index.html">CouponsProject</a>
+      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
    </div>
-   <div>
+
       <ul class="nav navbar-nav">
-         <li class="active"><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
-         <li><a href="#">My Coupons</a></li>
+         <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
+         <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
          <li><a href="/CouponsProject/adminentry.jsp">Connect As Admin</a></li>
-         <li><a href="#">Get Coupon</a></li>
-         <li class="dropdown">
-            <a href="/CouponsProject/controller/addcoupon" class="dropdown-toggle" data-toggle="dropdown">
-               Java 
-               <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-               <li><a href="#">jmeter</a></li>
-               <li><a href="#">EJB</a></li>
-               <li><a href="#">Jasper Report</a></li>
-               <li class="divider"></li>
-               <li><a href="#">Separated link</a></li>
-               <li class="divider"></li>
-               <li><a href="#">One more separated link</a></li>
-            </ul>
-         </li>
-      </ul>
+          <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
+          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          </ul>
+</nav>	
+	</header>
+	
+	
+<div class="panel panel-info coupouns_panel">
+  <div class="panel-heading">
+    <h3 class="panel-title">Administrator Entry</h3>
+  </div>
+  <div class="panel-body">
+	<form action="/CouponsProject/controller/login_request" method="post" class="admin_form">
+            <div class="col-xs-3 user-list">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input type="text" name="name" class="form-control" placeholder="Username">
+                </div>
+            </div>
+            <div class="col-xs-3 user-list">
+                <div class="input-group">
+                	<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <input type="password" name="pwd" class="form-control" placeholder="Password">
+                </div>
+            </div>
+             <div class="col-xs-3 user-list">
+            <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+    </form>
    </div>
-</nav>
-</header>
-
-
-  <body>
-<!-- The Footer Bar -->
-<div class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container">
-      <a href="/CouponsProject/index.html">
-      <button type="button" class="navbar-btn btn-info btn pull-left">
-      <span class="glyphicon glyphicon-home"></span>
-      
-   	  </button>
-   	  </a>
-        <p class="navbar-text">2014 Java EE Project</p>
-        <button type="button" class="navbar-btn btn-info btn pull-right">About</button>
-        <span class="badge pull-right">3</span>
-      </div>	
     </div>
 
     
-  </body>
+</body>
 </html>

@@ -24,28 +24,34 @@
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand" href="/CouponsProject/index.html">CouponsProject</a>
+      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
    </div>
-   <div>
+
       <ul class="nav navbar-nav">
          <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
-         <li><a href="#">My Coupons</a></li>
+         <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
          <li><a href="/CouponsProject/adminentry.jsp">Connect As Admin</a></li>
+          <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
+          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <!--  <ul class="nav navbar-nav navbar-right">
           <li><p class="navbar-text">2014 Java EE Project</p></li>
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           
-          </ul>
-   </div>
-</nav>
+          </ul>	
+          -->
+
+</nav>	
 </header>
 
 <!-- BootStrap Panel Table Showing Our Coupons -->
-<div class="panel panel-default">
-   <div class="panel-heading">Stored Coupons</div>
+
+<div class="panel panel-info coupouns_panel">
+  <div class="panel-heading">
+    <h3 class="panel-title">Stored Coupons</h3>
+  </div>
    <table class="table">
-      <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th>Purchase</th>
+      <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th>Expiration</th><th>Purchase</th>
       <% 
       	Collection products = (Collection)request.getAttribute("coupons");
       	if(products ==null){
@@ -60,6 +66,7 @@
 		<td><%= coupon.getId() %></td>
 		<td><%= coupon.getName() %></td>
 		<td><%= coupon.getDescription() %></td>
+		<td><%= coupon.getDate() %></td>
 		<td><a href="/CouponsProject/controller/mycart?c_id=<%= coupon.getId() %>">Add To Cart</a></td>
 		</tr>
 	
@@ -68,8 +75,24 @@
 
 	 %>
 
+
    </table>
 </div>
-
+	
+<div class="col-xs-2 alert alert-dismissable alert-info col">
+	  <strong>Response time:</strong> <br>
+	  <%
+	  String time = (String)session.getAttribute("c_time");
+	  System.out.println("controller took:"+time);
+	  if(time!=null) {
+		  %>
+		  
+		<%=  time.toString()%>
+		 
+		 <% 
+	  }
+	
+	  %>
+</div>
   </body>
 </html>

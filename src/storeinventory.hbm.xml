@@ -13,5 +13,10 @@
 		<property name="description">
 			<column name="DESCRIPTION"/>
 		</property>
+		
+		<property type="date" name="date">
+			<column name="expiration"/>
+		</property>
+		
 	</class>
 </hibernate-mapping>

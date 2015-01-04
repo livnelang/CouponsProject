@@ -4,12 +4,16 @@ package il.ac.shenkar.samples.controller;
 import il.ac.shenkar.samples.model.Coupon;
 import il.ac.shenkar.samples.model.CouponException;
 import il.ac.shenkar.samples.model.InventoryException;
+import il.ac.shenkar.samples.model.MD5Manager;
 import il.ac.shenkar.samples.model.MySQLCouponsDAO;
 import il.ac.shenkar.samples.model.ShoppingCart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -85,13 +89,22 @@ public class InventoryController extends HttpServlet {
 		
 		/**
 		 * Admin addCoupon page
+		 * ets all input parameters
+		 * and set new Coupon on Data Base
 		 */
 		else if(path.endsWith("addcoupon"))
 		{
 			String name = request.getParameter("c_name");
 			String desc = request.getParameter("c_des");
 			int _id = Integer.parseInt(request.getParameter("c_id"));
-			Coupon c1 = new Coupon(_id,name,desc);
+			Date d = null;
+			try {
+				d = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(request.getParameter("expiry_date"));
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			Coupon c1 = new Coupon(_id,name,desc,d);
 			
 			try {
 				request.setAttribute("addcoupon", MySQLCouponsDAO.getInstance().addCoupon(c1));
@@ -135,31 +148,52 @@ public class InventoryController extends HttpServlet {
 			
 		}
 		
+		/**
+		 * Redirects to the session stored Coupons
+		 */
 		else if(path.endsWith("mycartentry")) {
-	
-			
 			// Going to turn it to mycoupons.jsp page and show purchased coupons
-						dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
-						dispatcher.forward(request, response);
+			dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
+			dispatcher.forward(request, response);
+		}
+		
+		/**
+		 * Take care of Admin attempt to enter the system
+		 */
+		else if(path.endsWith("login_request")) {
+			
+			try {
+			// extract session parameters for check
+			String user = request.getParameter("name");
+			String password = request.getParameter("pwd");
+			MD5Manager md5 = new MD5Manager();
+			boolean admincredit = false;
+			if(user.equals("admin")){
+				admincredit = md5.passAuthentication(password);
+				}
+			}
+			
+			/*
+			if(admincredit) {
+				
+			}*/
+			catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			/*dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
+			dispatcher.forward(request, response);*/
 			
 		}
 		
-		
-		/*
-		else if(path.endsWith("getCookies"))
-		{
-			PrintWriter out = response.getWriter();
-			Cookie[] vec = request.getCookies();
-			//int l = vec.length;
-			out.println("Counter: ");
-			out.println(count);			
-			out.flush();
-			
-		}
-		*/
 		
 
-		
+
+		/**
+		 * Redirects to 404 page 
+		 */
 		else {
 			dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
 			dispatcher.forward(request, response);

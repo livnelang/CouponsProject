@@ -24,26 +24,31 @@
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand" href="/CouponsProject/index.html">CouponsProject</a>
+      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
    </div>
-   <div>
+
       <ul class="nav navbar-nav">
          <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
-         <li><a href="#">My Coupons</a></li>
+         <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
          <li><a href="/CouponsProject/adminentry.jsp">Connect As Admin</a></li>
+          <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
+          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <!--  <ul class="nav navbar-nav navbar-right">
           <li><p class="navbar-text">2014 Java EE Project</p></li>
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           
-          </ul>
-   </div>
-</nav>
-</header>
+          </ul>	
+          -->
+
+</nav>	
+</header>		
 
 <!-- BootStrap Panel Table Showing Our Coupons -->
-<div class="panel panel-default">
-   <div class="panel-heading">My Coupons</div>
+<div class="panel panel-info coupouns_panel">
+  <div class="panel-heading">
+    <h3 class="panel-title">My Coupons</h3>
+  </div>
    <table class="table">
       <th class="col-sm-1">Coupon Name</th><th  class="col-sm-1">Description</th class="col-sm-1"><th class="col-sm-1">Quantity</th>
       <% 
