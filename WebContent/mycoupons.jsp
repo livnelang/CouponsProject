@@ -20,6 +20,7 @@
   
 <!--  Body Content -->
   <body>
+  <jsp:useBean id="cart" class="il.ac.shenkar.samples.model.ShoppingCart" scope="session"/>
   <header>
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
@@ -52,7 +53,6 @@
    <table class="table">
       <th class="col-sm-1">Coupon Name</th><th  class="col-sm-1">Description</th class="col-sm-1"><th class="col-sm-1">Quantity</th>
       <% 
-      	ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
       	System.out.println("inside mycoupons.jsp: "+cart);
       	
       	Map<Integer,ShoppingCartLine> lines =  cart.getLines();

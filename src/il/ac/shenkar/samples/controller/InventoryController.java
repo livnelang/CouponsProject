@@ -33,6 +33,7 @@ public class InventoryController extends HttpServlet {
 	private static int count = 0;
 	private static String client_name=null;
 	private static String client_id=null;
+	private boolean admincredit = false;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -153,9 +154,16 @@ public class InventoryController extends HttpServlet {
 		 */
 		else if(path.endsWith("mycartentry")) {
 			// Going to turn it to mycoupons.jsp page and show purchased coupons
+			HttpSession session = request.getSession();
+			if(session.getAttribute("cart")==null) {
+				System.out.println("null cart");
+			}
+			
 			dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
 			dispatcher.forward(request, response);
 		}
+		
+		
 		
 		/**
 		 * Take care of Admin attempt to enter the system
@@ -167,16 +175,22 @@ public class InventoryController extends HttpServlet {
 			String user = request.getParameter("name");
 			String password = request.getParameter("pwd");
 			MD5Manager md5 = new MD5Manager();
-			boolean admincredit = false;
 			if(user.equals("admin")){
 				admincredit = md5.passAuthentication(password);
 				}
-			}
+			// if return false --> then redirect to errorPage
+				else {
+					dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+					dispatcher.forward(request, response);
+				}
 			
-			/*
+			// if return positive --> then redirect to AdminPage
 			if(admincredit) {
-				
-			}*/
+				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
+				dispatcher.forward(request, response);
+				}
+			
+			}
 			catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

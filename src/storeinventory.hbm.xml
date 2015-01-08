@@ -15,7 +15,7 @@
 		</property>
 		
 		<property type="date" name="date">
-			<column name="expiration"/>
+			<column name="EXPIRATION"/>
 		</property>
 		
 	</class>

@@ -20,7 +20,7 @@
   </head>
   
 <!--  Body Content -->
-  <body>
+<body>
   <header>
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
@@ -43,22 +43,21 @@
           -->
 
 </nav>	
-</header>
-
-<!-- BootStrap Panel Table Showing Our Coupons -->
-
-<div class="panel panel-info coupouns_panel">
+	</header>
+	
+	<!-- BootStrap Panel Table Showing Our Coupons -->
+<div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
-    <h3 class="panel-title">Stored Coupons</h3>
+    <h3 class="panel-title">Admin Control Panel</h3>
   </div>
    <table class="table">
       <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th>Expiration</th><th>Purchase</th>
       <% 
       	Collection products = (Collection)request.getAttribute("coupons");
       	if(products ==null){
-      		out.write("DB Is Empty ");
+      		out.write("No Coupons Arrived");
       	}
-     	// if there are coupons & Collection isnt null
+      	// if there are coupons & Collection isnt null
       	else {
 		Iterator iterator = products.iterator();
 		while(iterator.hasNext())
@@ -84,29 +83,7 @@
 
    </table>
 </div>
-	
-<div id="time_div" class="col-xs-2 alert alert-dismissable alert-info col">
-	  <strong>Response time:</strong> <br>
-	  
-		<script type="text/javascript"> 
-	  	$( document ).ready(function() {
-	  		var time = <%=request.getAttribute("ctime")%>;
-	  	console.log( time );
-	  	});
-		</script>
-	  <%
-	  String time = null;
-	  time = (String)request.getAttribute("ctime");
-	  System.out.println("controller took:"+time);
-	  if(time!=null) {
-		  %>
-		  
-		<%=  time%>
-		 
-		 <% 
-	  }
-	
-	  %>
-</div>
-  </body>
+
+
+</body>
 </html>
