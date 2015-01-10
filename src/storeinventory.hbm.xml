@@ -14,7 +14,7 @@
 			<column name="DESCRIPTION"/>
 		</property>
 		
-		<property type="date" name="date">
+		<property type="timestamp" name="date">
 			<column name="EXPIRATION"/>
 		</property>
 		

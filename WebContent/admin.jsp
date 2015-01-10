@@ -11,12 +11,9 @@
 
     <!-- Bootstrap-CSS & General CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="../js/time.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/admin_js.js"></script>
   </head>
   
 <!--  Body Content -->
@@ -31,7 +28,7 @@
       <ul class="nav navbar-nav">
          <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
          <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
-         <li><a href="/CouponsProject/adminentry.jsp">Connect As Admin</a></li>
+         <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
@@ -49,17 +46,19 @@
 <div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
     <h3 class="panel-title">Admin Control Panel</h3>
+    Add Coupon <button class="black_gliph" type="button"><span class="glyphicon glyphicon-plus-sign"></span></button>
   </div>
    <table class="table">
-      <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th>Expiration</th><th>Purchase</th>
+      <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th class="col-sm-3">Expiration</th><th class="col-sm-1">Edit</th><th class="col-sm-1">Delete</th>
       <% 
-      	Collection products = (Collection)request.getAttribute("coupons");
-      	if(products ==null){
+      	MySQLCouponsDAO myDAo = (MySQLCouponsDAO)request.getAttribute("inventory");
+      	Collection coupons = myDAo.getInstance().getCoupons();
+      	if(coupons ==null){
       		out.write("No Coupons Arrived");
       	}
       	// if there are coupons & Collection isnt null
       	else {
-		Iterator iterator = products.iterator();
+		Iterator iterator = coupons.iterator();
 		while(iterator.hasNext())
 		{
 		Coupon coupon = (Coupon)iterator.next();
@@ -69,8 +68,10 @@
 		<td><%= coupon.getName() %></td>
 		<td><%= coupon.getDescription() %></td>
 		<td><%= coupon.getDate() %></td>
-		<td><a href="/CouponsProject/controller/mycart?c_id=<%= coupon.getId() %>">Add To Cart</a></td>
+		<td><button type="button" name=<%=coupon.getId() %>  class="black_gliph editbt"><span class="glyphicon glyphicon-list-alt"></span></button></td>
+		<td><button class="black_gliph" type="button"><span class="glyphicon glyphicon-floppy-remove"></span></button></td>
 		</tr>
+		
 	
 		<% 
 		}

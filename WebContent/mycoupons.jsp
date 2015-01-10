@@ -12,8 +12,6 @@
     <!-- Bootstrap-CSS & General CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
      <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </head>
@@ -31,7 +29,7 @@
       <ul class="nav navbar-nav">
          <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
          <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
-         <li><a href="/CouponsProject/adminentry.jsp">Connect As Admin</a></li>
+         <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>

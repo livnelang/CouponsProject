@@ -23,6 +23,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.BasicConfigurator;
 
 /**
  * Servlet implementation class InventoryController
@@ -34,6 +39,7 @@ public class InventoryController extends HttpServlet {
 	private static String client_name=null;
 	private static String client_id=null;
 	private boolean admincredit = false;
+	private Logger logger=null;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -47,6 +53,9 @@ public class InventoryController extends HttpServlet {
     public void init() {
     	try {
 			getServletContext().setAttribute("inventory", MySQLCouponsDAO.getInstance());
+			logger = Logger.getRootLogger();
+			BasicConfigurator.configure();
+			logger.setLevel(Level.OFF);
 			} 
     	catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -60,6 +69,7 @@ public class InventoryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getPathInfo();
+		//logger.info("Request has come, path: "+path);
 		RequestDispatcher dispatcher = null;
 
 		count++;
@@ -110,6 +120,44 @@ public class InventoryController extends HttpServlet {
 			try {
 				request.setAttribute("addcoupon", MySQLCouponsDAO.getInstance().addCoupon(c1));
 				dispatcher = getServletContext().getRequestDispatcher("/addcoupon.jsp");
+				dispatcher.forward(request, response);
+			} catch (CouponException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		/**
+		 * Incoming updated coupon 
+		 * gets parameters from request, 
+		 * and update with MySQLDAO instance
+		 */
+		else if(path.endsWith("updatecoupon"))
+		{
+			Coupon c1=null;
+			HttpSession session = request.getSession();
+			try {
+				int _id =  (int) session.getAttribute("coupon_for_edit");
+				String name = request.getParameter("c_name");
+				String desc = request.getParameter("c_des");
+				System.out.println(request.getParameter("exp_date"));
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+				Date d = simpleDateFormat.parse(request.getParameter("exp_date"));
+				c1 = new Coupon(_id,name,desc,d);
+			}
+			catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
+			try {
+				request.setAttribute("updated_coupon", MySQLCouponsDAO.getInstance().updateCoupon(c1));
+				if( (boolean) request.getAttribute("updated_coupon")) {
+					logger.info("Coupon id: "+(int) session.getAttribute("coupon_for_edit")+" was updated !");
+				}
+				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
 				dispatcher.forward(request, response);
 			} catch (CouponException e) {
 				// TODO Auto-generated catch block
@@ -186,6 +234,9 @@ public class InventoryController extends HttpServlet {
 			
 			// if return positive --> then redirect to AdminPage
 			if(admincredit) {
+				HttpSession session = request.getSession();
+				// set administration credit with true boolean variable
+				session.setAttribute("admin_log", true);
 				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
 				dispatcher.forward(request, response);
 				}
@@ -199,6 +250,65 @@ public class InventoryController extends HttpServlet {
 			
 			/*dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
 			dispatcher.forward(request, response);*/
+			
+		}
+		
+		/**
+		 * CHECK WHETHER ADMIN CREDIT IS GIVEN 
+		 * WITH BOOLEAN VALUES,
+		 * IF TRUE THEN REDIRECT TO 
+		 * ADMIN PAGE
+		 */
+		else if(path.endsWith("admin")) {
+			try {
+				boolean admin_connected = false;
+				HttpSession session = request.getSession();
+				admin_connected = (boolean) session.getAttribute("admin_log");
+				if(admin_connected){
+					dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
+					dispatcher.forward(request, response);
+				}
+					else {
+						dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+			
+			catch (Exception e) {
+				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+				dispatcher.forward(request, response);
+				e.printStackTrace();
+			}
+			
+		}
+		
+		/**
+		 * Treat Edit request from admin 
+		 */
+		else if(path.endsWith("edit_coupon")) {
+			try {
+				boolean admin_connected = false;
+				HttpSession session = request.getSession();
+				admin_connected = (boolean) session.getAttribute("admin_log");
+				if(admin_connected){
+					int edit_coupon = Integer.parseInt(request.getParameter("c_id"));
+					session.setAttribute("coupon_for_edit", edit_coupon);
+					request.setAttribute("coupon_for_edit",MySQLCouponsDAO.getInstance().getCoupon(edit_coupon));
+					System.out.println("arriived coupon for edit: "+edit_coupon);
+					dispatcher = getServletContext().getRequestDispatcher("/editcoupon.jsp");
+					dispatcher.forward(request, response);
+				}
+					else {
+						dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+			
+			catch (Exception e) {
+				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+				dispatcher.forward(request, response);
+				e.printStackTrace();
+			}
 			
 		}
 		

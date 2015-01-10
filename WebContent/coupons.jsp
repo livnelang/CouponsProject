@@ -12,11 +12,8 @@
     <!-- Bootstrap-CSS & General CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
      <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="../js/time.js"></script>
   </head>
   
 <!--  Body Content -->
@@ -31,7 +28,7 @@
       <ul class="nav navbar-nav">
          <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
          <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
-         <li><a href="/CouponsProject/adminentry.jsp">Connect As Admin</a></li>
+         <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
@@ -54,13 +51,13 @@
    <table class="table">
       <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th>Expiration</th><th>Purchase</th>
       <% 
-      	Collection products = (Collection)request.getAttribute("coupons");
-      	if(products ==null){
+      	Collection coupons = (Collection)request.getAttribute("coupons");
+      	if(coupons ==null){
       		out.write("DB Is Empty ");
       	}
      	// if there are coupons & Collection isnt null
       	else {
-		Iterator iterator = products.iterator();
+		Iterator iterator = coupons.iterator();
 		while(iterator.hasNext())
 		{
 		Coupon coupon = (Coupon)iterator.next();

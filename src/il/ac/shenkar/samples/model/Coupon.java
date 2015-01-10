@@ -106,6 +106,7 @@ public class Coupon
      * @return
      */
 	public Date getDate() {
+		
 		return date;
 	}
 	
@@ -115,6 +116,7 @@ public class Coupon
      * @return
      */
 	public void setDate(Date date) {
+		System.out.println(date.toString());
 		this.date = date;
 	}
 	
