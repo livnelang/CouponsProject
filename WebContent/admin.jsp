@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="../js/admin_js.js"></script>
   </head>
   
@@ -45,8 +46,23 @@
 	<!-- BootStrap Panel Table Showing Our Coupons -->
 <div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
-    <h3 class="panel-title">Admin Control Panel</h3>
-    Add Coupon <button class="black_gliph" type="button"><span class="glyphicon glyphicon-plus-sign"></span></button>
+  	<ul class="admin-ul">
+    	<li>Admin Control Panel</li>
+    	<li class="dropdown pull-right"> 
+                <div class="btn-group">
+			    <button class="btn btn-primary">Action</button>
+			    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			    <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu">
+			    <li><a href="../addcoupon.jsp">Add Coupon</a></li>
+			    <li><a href="#">Add business</a></li>
+			    <li><a href="#">Change Password</a></li>
+			    </ul>
+			    </div>
+            </ul>
+        </li>
+    </ul>
   </div>
    <table class="table">
       <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th class="col-sm-3">Expiration</th><th class="col-sm-1">Edit</th><th class="col-sm-1">Delete</th>

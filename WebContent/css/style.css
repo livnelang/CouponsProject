@@ -117,3 +117,30 @@ header {
 .edit_form {
 	margin-top:10px;
 }
+
+.admin-ul {
+	list-style-type: none;
+	padding:0px;
+}
+
+.admin-ul>li  {
+	display:inline;
+	width:200px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 16px;
+	color: inherit;
+}
+
+.admin-ul>li a {
+	color: inherit;
+}
+
+.pull-right  {
+	width:100px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 16px;
+	color: #FFF;
+	
+}
