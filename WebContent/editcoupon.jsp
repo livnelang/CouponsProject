@@ -55,6 +55,7 @@
       	}
       	%>
 
+<!--  Admin Control Panel -->
 <div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
     <h3 class="panel-title">Edit Coupon<span class="edit_coupon">Coupon id:<%=c_edit.getId() %></span></h3>

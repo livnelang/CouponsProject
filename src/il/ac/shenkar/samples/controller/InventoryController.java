@@ -105,21 +105,28 @@ public class InventoryController extends HttpServlet {
 		 */
 		else if(path.endsWith("addcoupon"))
 		{
-			String name = request.getParameter("c_name");
-			String desc = request.getParameter("c_des");
-			int _id = Integer.parseInt(request.getParameter("c_id"));
-			Date d = null;
+			Coupon c1=null;
+			HttpSession session = request.getSession();
 			try {
-				d = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(request.getParameter("expiry_date"));
-			} catch (ParseException e1) {
+				int _id = Integer.parseInt(request.getParameter("c_id"));
+				String name = request.getParameter("c_name");
+				String desc = request.getParameter("c_des");
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+				Date d = simpleDateFormat.parse(request.getParameter("exp_date"));
+				c1 = new Coupon(_id,name,desc,d);
+			}
+			
+			catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			Coupon c1 = new Coupon(_id,name,desc,d);
 			
 			try {
 				request.setAttribute("addcoupon", MySQLCouponsDAO.getInstance().addCoupon(c1));
-				dispatcher = getServletContext().getRequestDispatcher("/addcoupon.jsp");
+				if( (boolean) request.getAttribute("updated_coupon")) {
+					logger.info("Coupon id: "+(int) session.getAttribute("coupon_for_edit")+" was added !");
+				}
+				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
 				dispatcher.forward(request, response);
 			} catch (CouponException e) {
 				// TODO Auto-generated catch block

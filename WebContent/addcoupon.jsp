@@ -10,77 +10,93 @@
     <title>Coupons Project</title>
 
     <!-- Bootstrap-CSS & General CSS -->
-    <link href="/CouponsProject/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="css/style.css" rel="stylesheet">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/admin_js.js"></script>
   </head>
   <body>
   
+ <header>
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand" href="/CouponsProject/index.html">CouponsProject</a>
+      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
    </div>
-   <div>
+
       <ul class="nav navbar-nav">
-         <li class="active"><a href="/CouponsProject/controller/coupons">Watch Your Coupons</a></li>
-         <li><a href="/CouponsProject/addcoupon.jsp">Add Coupon</a></li>
-         <li><a href="#">Get Coupon</a></li>
-         <li><a href="/CouponsProject/controller/getCookies">Get Cookies</a></li>
-         <li class="dropdown">
-            <a href="/CouponsProject/controller/addcoupon" class="dropdown-toggle" data-toggle="dropdown">
-               Java 
-               <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-               <li><a href="#">jmeter</a></li>
-               <li><a href="#">EJB</a></li>
-               <li><a href="#">Jasper Report</a></li>
-               <li class="divider"></li>
-               <li><a href="#">Separated link</a></li>
-               <li class="divider"></li>
-               <li><a href="#">One more separated link</a></li>
-            </ul>
-         </li>
-      </ul>
-   </div>
-</nav>
+         <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
+         <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
+         <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
+          <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
+          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          </ul>
+          <!--  <ul class="nav navbar-nav navbar-right">
+          <li><p class="navbar-text">2014 Java EE Project</p></li>
+          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          
+          </ul>	
+          -->
 
-
+</nav>	
+</header>
 			
-	<!--  Form for Adding A Coupon -->
-	<form class="form-horizontal" role="form" action="/CouponsProject/controller/addcoupon" method="get">
-	<div class="form-group">
-      <label for="id" class="col-sm-2 control-label">Coupon ID</label>
-      <div class="col-sm-2">
+	<!--  Admin Control Panel -->
+	<div class="panel panel-primary coupouns_panel">
+  <div class="panel-heading">
+  	<ul class="admin-ul">
+    	<li>Add Coupon</li>
+    	<li class="dropdown pull-right"> 
+                <div class="btn-group">
+			    <button class="btn btn-primary">Action</button>
+			    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			    <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu">
+			    <li><a href="../addcoupon.jsp">Add Coupon</a></li>
+			    <li><a href="#">Add business</a></li>
+			    <li><a href="#">Change Password</a></li>
+			    </ul>
+			    </div>
+            </ul>
+ 	</div>
+	<div class="panel-body">
+	<form name="addForm" class="edit_form" role="form" action="/CouponsProject/controller/updatecoupon" method="get" onsubmit="return addCouponValidateForm()">	
+   	 <div class="form-group col-xs-3 user-list">
+      <label for="firstname">Coupon Id</label>
          <input type="text" class="form-control" name="c_id" 
-            placeholder="Enter random id">
-      </div>
-   </div>		
-   <div class="form-group">
-      <label for="firstname" class="col-sm-2 control-label">Coupon Name</label>
-      <div class="col-sm-2">
+            placeholder="Enter Id">
+   	</div>
+   
+   <div class="form-group col-xs-3 user-list">
+      <label for="firstname">Coupon Name</label>
          <input type="text" class="form-control" name="c_name" 
             placeholder="Enter Name">
-      </div>
    </div>
-   <div class="form-group">
-      <label for="lastname" class="col-sm-2 control-label">Description</label>
-      <div class="col-sm-2">
-         <input type="text" class="form-control" name="c_des" 
+   <div class="form-group col-xs-3 user-list">
+      <label for="lastname">Description</label>
+         <input type="text" class="form-control" name="c_des"
             placeholder="Enter Coupon Description">
-      </div>
-   </div>
+  	</div>
+  		<div class="form-group col-xs-5 user-list">
+      	 <label for="lastname">Exipry Date Time</label>
+          <div class='input-group date' id='datetimepicker1'>
+          <input type="text" value="" class="form-control" name="exp_date" placeholder="Enter: yyyy/mm/dd hh:mm" />
+        	<span id="time_click" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+         	</span>
+         	</div>
+  		</div>
 
-   <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-         <button type="submit" class="btn btn-default">Add Coupon</button>
-      </div>
-   </div>
-</form>
+  		
+   <div class="form-group col-xs-3 user-list">
+   <button type="submit" class="btn btn-default">Add Coupon  &nbsp<span class="glyphicon glyphicon-hand-right"></span></button>
+         
+   </div>  
+	</form>
+</div>
+
+</div>
 			
 			<%
 			boolean added = false;
@@ -105,23 +121,5 @@
 			}
 			
 			%>
-
-
-
-<!-- The Footer Bar -->
-<div class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container">
-      <a href="/CouponsProject/index.html">
-      <button type="button" class="navbar-btn btn-info btn pull-left">
-      <span class="glyphicon glyphicon-home"></span>
-      
-   	  </button>
-   	  </a>
-        <p class="navbar-text">2014 Java EE Project</p>
-        <button type="button" class="navbar-btn btn-info btn pull-right">About</button>
-      </div>	
-    </div>
-
-    
   </body>
 </html>
