@@ -1,6 +1,8 @@
+<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=windows-1255"
     import="java.util.*,il.ac.shenkar.samples.model.*"
     pageEncoding="windows-1255"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,9 +13,10 @@
 
     <!-- Bootstrap-CSS & General CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="../js/admin_js.js"></script>
   </head>
   
 <!--  Body Content -->
@@ -44,12 +47,33 @@
 
 <!-- BootStrap Panel Table Showing Our Coupons -->
 
-<div class="panel panel-info coupouns_panel">
+<div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
-    <h3 class="panel-title">Stored Coupons</h3>
+    <ul class="admin-ul">
+    	<li>Stored Coupons</li>
+    	<li class="dropdown pull-right"> 
+                <div class="btn-group">
+			    <button class="btn btn-primary">Select Category</button>
+			    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			    <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu">
+			    <c:forEach var="cat" items="${catgs}">
+			    <li><a href="#">${cat}</a></li>	
+			    </c:forEach>
+			    </ul>
+			    </div>
+            </ul>
+        </li>
+    </ul>
   </div>
    <table class="table">
-      <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th>Expiration</th><th>Purchase</th>
+      <th class="col-sm-1">Id</th>
+      <th  class="col-sm-1">Name</th class="col-sm-1">
+      <th class="col-sm-1">Description</th>
+      <th class="col-sm-1">Category</th>
+      <th class="col-sm-1">Longitude</th><th class="col-sm-1">Latitude</th>
+      <th>Expiration</th><th>Purchase</th>
       <% 
       	Collection coupons = (Collection)request.getAttribute("coupons");
       	if(coupons ==null){
@@ -66,6 +90,9 @@
 		<td><%= coupon.getId() %></td>
 		<td><%= coupon.getName() %></td>
 		<td><%= coupon.getDescription() %></td>
+		<td><%= coupon.getCategory() %></td>
+		<td><%= coupon.getLongitude() %></td>
+		<td><%= coupon.getLatitude() %></td>
 		<td><%= coupon.getDate() %></td>
 		<td><a href="/CouponsProject/controller/mycart?c_id=<%= coupon.getId() %>">Add To Cart</a></td>
 		</tr>

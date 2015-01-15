@@ -44,7 +44,7 @@
 </header>		
 
 <!-- BootStrap Panel Table Showing Our Coupons -->
-<div class="panel panel-info coupouns_panel">
+<div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
     <h3 class="panel-title">My Coupons</h3>
   </div>

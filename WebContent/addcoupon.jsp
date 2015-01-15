@@ -62,7 +62,7 @@
             </ul>
  	</div>
 	<div class="panel-body">
-	<form name="addForm" class="edit_form" role="form" action="/CouponsProject/controller/updatecoupon" method="get" onsubmit="return addCouponValidateForm()">	
+	<form name="addForm" class="edit_form" role="form" action="/CouponsProject/controller/addcoupon" method="get" onsubmit="return addCouponValidateForm()">	
    	 <div class="form-group col-xs-3 user-list">
       <label for="firstname">Coupon Id</label>
          <input type="text" class="form-control" name="c_id" 
@@ -79,14 +79,29 @@
          <input type="text" class="form-control" name="c_des"
             placeholder="Enter Coupon Description">
   	</div>
-  		<div class="form-group col-xs-5 user-list">
-      	 <label for="lastname">Exipry Date Time</label>
-          <div class='input-group date' id='datetimepicker1'>
-          <input type="text" value="" class="form-control" name="exp_date" placeholder="Enter: yyyy/mm/dd hh:mm" />
-        	<span id="time_click" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-         	</span>
-         	</div>
-  		</div>
+  		<div class="form-group col-xs-3 user-list">
+	      <label for="description">Category</label>
+	         <input type="text" class="form-control" name="c_cat" 
+	            placeholder="Enter Coupon Category">
+	  	</div>
+	  		<div class="form-group col-xs-3 user-list">
+	      <label for="longitude">Longitude</label>
+	         <input type="text" class="form-control" name="c_ltude"
+	            placeholder="Enter Coupon Longitude">
+	  		</div>
+	  			<div class="form-group col-xs-3 user-list">
+		      		<label for="latitude">Latitude</label>
+		         		<input type="text" class="form-control" name="c_latude"
+		            placeholder="Enter Coupon Latitude">
+	  			</div>
+			  		<div class="form-group col-xs-5 user-list">
+			      	 <label for="lastname">Exipry Date Time</label>
+			          <div class='input-group date' id='datetimepicker1'>
+			          <input type="text" value="" class="form-control" name="exp_date" placeholder="Enter: yyyy/mm/dd hh:mm" />
+			        	<span id="time_click" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+			         	</span>
+			         	</div>
+			  		</div>
 
   		
    <div class="form-group col-xs-3 user-list">

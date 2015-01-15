@@ -55,7 +55,7 @@
              <div class="col-xs-3 user-list">
             <button type="submit" class="btn btn-primary">Login</button>
             </div>
-    </form>
+    </form>	
    </div>
     </div>
 

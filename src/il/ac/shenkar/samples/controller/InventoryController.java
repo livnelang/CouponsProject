@@ -85,6 +85,7 @@ public class InventoryController extends HttpServlet {
 				MySQLCouponsDAO inventory =  (MySQLCouponsDAO) getServletContext().getAttribute("inventory");
 				
 				request.setAttribute("coupons", inventory.getCoupons());
+				request.setAttribute("catgs", inventory.getCategories());
 				dispatcher = getServletContext().getRequestDispatcher("/coupons.jsp");
 				dispatcher.forward(request, response);
 			}
@@ -111,9 +112,12 @@ public class InventoryController extends HttpServlet {
 				int _id = Integer.parseInt(request.getParameter("c_id"));
 				String name = request.getParameter("c_name");
 				String desc = request.getParameter("c_des");
+				String catg = request.getParameter("c_cat");
+				int ltude =  (int) session.getAttribute("c_ltude");
+				int latude =  (int) session.getAttribute("c_latude");
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
 				Date d = simpleDateFormat.parse(request.getParameter("exp_date"));
-				c1 = new Coupon(_id,name,desc,d);
+				c1 = new Coupon(_id,name,desc,catg,ltude,latude,d);
 			}
 			
 			catch (ParseException e1) {
@@ -123,13 +127,13 @@ public class InventoryController extends HttpServlet {
 			
 			try {
 				request.setAttribute("addcoupon", MySQLCouponsDAO.getInstance().addCoupon(c1));
-				if( (boolean) request.getAttribute("updated_coupon")) {
-					logger.info("Coupon id: "+(int) session.getAttribute("coupon_for_edit")+" was added !");
+				if( (boolean) request.getAttribute("addcoupon")) {
+					logger.info("Coupon id: "+request.getParameter("c_id")+" was added !");
 				}
 				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
 				dispatcher.forward(request, response);
 			} catch (CouponException e) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generated catch block	
 				e.printStackTrace();
 			}
 			
@@ -148,10 +152,13 @@ public class InventoryController extends HttpServlet {
 				int _id =  (int) session.getAttribute("coupon_for_edit");
 				String name = request.getParameter("c_name");
 				String desc = request.getParameter("c_des");
+				String catg = request.getParameter("c_cat");
+				int ltude =  (int) session.getAttribute("c_ltude");
+				int latude =  (int) session.getAttribute("c_latude");
 				System.out.println(request.getParameter("exp_date"));
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
 				Date d = simpleDateFormat.parse(request.getParameter("exp_date"));
-				c1 = new Coupon(_id,name,desc,d);
+				c1 = new Coupon(_id,name,desc,catg,ltude,latude,d);
 			}
 			catch (ParseException e1) {
 				// TODO Auto-generated catch block
@@ -172,6 +179,40 @@ public class InventoryController extends HttpServlet {
 			}
 			
 		}
+		
+		/**
+		 * Delete Coupon Treat
+		 * Delete by coupon Id
+		 */
+		else if(path.endsWith("deletecoupon"))
+		{
+			try {
+				boolean admin_connected = false;
+				HttpSession session = request.getSession();
+				admin_connected = (boolean) session.getAttribute("admin_log");
+				if(admin_connected){
+					int coupon_id = Integer.parseInt(request.getParameter("c_id"));
+					if(MySQLCouponsDAO.getInstance().deleteCoupon(coupon_id)) {
+						logger.info("Coupon id: "+request.getParameter("c_id")+" was deleted !");
+					}
+					dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
+					dispatcher.forward(request, response);
+				}
+					else {
+						dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+			
+			catch (Exception e) {
+				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+				dispatcher.forward(request, response);
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
 		
 		/**
 		 * Added Item Clicked

@@ -9,7 +9,8 @@ import java.util.Date;
 /**
  * Coupon class
  * represents the coupon object with id, name,
- * description & expiration date
+ * description, longitude, latitude &
+ * & expiration date
  * @author Livne
  *
  */
@@ -18,6 +19,9 @@ public class Coupon
     private int id;
     private String name;
     private String description;
+    private String category;
+    private int longitude;
+    private int latitude;
     private Date date;
     
     /**
@@ -33,14 +37,20 @@ public class Coupon
      * @param id
      * @param name
      * @param description
+     * @param category
+     * @param longitude
+     * @param latitude
      * @param date
      */
-    public Coupon(int id, String name, String description,Date date)
+    public Coupon(int id, String name, String description,String category, int longitude,int latitude,Date date)
     {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.category = category;
         this.date = date;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
     
     /**
@@ -103,7 +113,7 @@ public class Coupon
 	/**
      * Date Getter
      * returns Coupon Date
-     * @return
+     * @return Date
      */
 	public Date getDate() {
 		
@@ -113,13 +123,67 @@ public class Coupon
 	/**
      * Date Setter
      * Set Coupon Date
-     * @return
      */
 	public void setDate(Date date) {
 		System.out.println(date.toString());
 		this.date = date;
 	}
 	
+	
+	/**
+     * Category Getter
+     * returns Coupon Category
+     * @return String
+     */
+	public String getCategory() {
+		return category;
+	}
+	
+	/**
+     * Category Setter
+     * Set Coupon Category
+     * @return void
+     */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	/**
+     * Longitude Getter
+     * returns Coupon Longitude
+     * @return int
+     */
+	public int getLongitude() {
+		return longitude;
+	}
+
+	/**
+     * Longitude Setter
+     * Set Coupon Longitude
+     * @return void
+     */
+	public void setLongitude(int longitude) {
+		this.longitude = longitude;
+	}
+	
+	/**
+     * Latitude Getter
+     * returns Coupon Latitude
+     * @return int
+     */
+	public int getLatitude() {
+		return latitude;
+	}
+	
+	/**
+     * Latitude Setter
+     * Set Coupon Latitude
+     * @return void
+     */
+	public void setLatitude(int latitude) {
+		this.latitude = latitude;
+	}
+
 	@Override
 	public String toString() 
 	{

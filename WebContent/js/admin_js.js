@@ -10,6 +10,21 @@ $(document).ready(function(){
 		});
 		size = size-1;
 	 }
+	 
+	// About to set listeners to all buttons with an id removebt
+	 var buttons = document.getElementsByClassName('removebt');
+	 var size = buttons.length;
+	 var current_button=null;
+	 while(size>0) {
+		current_button = buttons[size-1];
+		current_button.addEventListener('click', function () {
+		location.href="/CouponsProject/controller/deletecoupon?c_id="+this.name;
+		});
+		size = size-1;
+	 }
+	 
+	 
+	 
 });
 
 // Function to return if a number is an Integer

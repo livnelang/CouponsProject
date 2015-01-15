@@ -85,7 +85,7 @@
 		<td><%= coupon.getDescription() %></td>
 		<td><%= coupon.getDate() %></td>
 		<td><button type="button" name=<%=coupon.getId() %>  class="black_gliph editbt"><span class="glyphicon glyphicon-list-alt"></span></button></td>
-		<td><button class="black_gliph" type="button"><span class="glyphicon glyphicon-floppy-remove"></span></button></td>
+		<td><button class="black_gliph removebt" name=<%=coupon.getId() %> type="button"><span class="glyphicon glyphicon-floppy-remove"></span></button></td>
 		</tr>
 		
 	

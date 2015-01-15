@@ -249,5 +249,26 @@ public class MySQLCouponsDAO implements ICouponsDAO
         
         return true;
 
-    }  
+    }
+    
+    /**
+     * Public Function to return all coupon categories
+     * @return ArrayList<String> -- ARRAY OF CATEGORIES
+     * @throws CouponException 
+     */
+    public ArrayList<String> getCategories() throws CouponException{
+    	ArrayList<String> cats = new ArrayList<String>();
+    	ArrayList<Coupon> coupon_array = (ArrayList<Coupon>) this.getCoupons();
+    	for (Coupon coupon : coupon_array) {
+    		// checks whether certain category already in the new List
+			if (cats.contains(coupon.getCategory())) {
+				continue;
+			}
+				else {
+					cats.add(coupon.getCategory());
+				}
+		}
+    	// return the categories array
+    	return cats;
+    }
 }

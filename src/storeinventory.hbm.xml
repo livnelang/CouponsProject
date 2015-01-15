@@ -10,13 +10,21 @@
 		<property name="name">
 			<column name="NAME"/>
 		</property>
-		<property name="description">
-			<column name="DESCRIPTION"/>
-		</property>
-		
-		<property type="timestamp" name="date">
-			<column name="EXPIRATION"/>
-		</property>
+			<property name="description">
+				<column name="DESCRIPTION"/>
+			</property>
+				<property name="category">
+					<column name="CATEGORY"/>
+				</property>
+					<property name="longitude">
+						<column name="LONGITUDE"/>
+					</property>
+						<property name="latitude">
+						<column name="LATITUDE"/>
+						</property>
+							<property type="timestamp" name="date">
+								<column name="EXPIRATION"/>
+							</property>
 		
 	</class>
 </hibernate-mapping>
