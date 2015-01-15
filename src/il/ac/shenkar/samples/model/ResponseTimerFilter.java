@@ -24,6 +24,7 @@ public class ResponseTimerFilter implements Filter {
 	  protected FilterConfig config;
 	  RequestDispatcher dispatcher = null;
 	  
+	  
 	  public void init(FilterConfig config) throws ServletException {
 	    this.config = config;
 	  }
@@ -33,19 +34,29 @@ public class ResponseTimerFilter implements Filter {
 	  
 	  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 	      throws ServletException, IOException {
+		  String path = ((HttpServletRequest) request).getPathInfo();
 	    long startTime = System.currentTimeMillis();
-	    chain.doFilter(request, response);
+	    chain.doFilter(request, response);	    
 	    long elapsed = System.currentTimeMillis() - startTime;
-	    String name = "servlet";
+	    // printer Write Out get writer 
+	    PrintWriter out = response.getWriter();
+	   // out.println("Time Elapsed: "+elapsed + "ms");
+	    System.out.println("time elapsed: "+elapsed);
+	    out.println("<div class=\"col-xs-2 alert alert-dismissable alert-info col\">"+
+	  "<strong>Response time: "+elapsed+" ms</strong> <br> </div>");
+	  
+	    out.flush();
+	   /* String name = "servlet";
 	    if (request instanceof HttpServletRequest) {
 	      name = ((HttpServletRequest) request).getRequestURI();
 	    }
+	    */
 	    
 	    // Send to Request the time controller had to response
-	    request.setAttribute("ctime", elapsed);
+	   /* request.setAttribute("ctime", elapsed);
 	    ((RequestDispatcher) request).forward(request, response);
 	    System.out.println(request.toString());
 	    config.getServletContext().setAttribute("c_time", elapsed);
-	    config.getServletContext().log(name + " took " + elapsed + " ms");
+	    config.getServletContext().log(name + " took " + elapsed + " ms");*/
 	  }
 	}

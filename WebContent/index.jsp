@@ -45,7 +45,7 @@
 
 	<div class="alert alert-dismissable alert-info entry_text">
 	<strong>Hello ! </strong> <br> <br>
-
+	
 	 Welcome to our coupons managment project,<br>
 	 Out application enable you to watch different coupons by choice, <br>
 	 adding them to your cart and follow them in your session.		  <br>
@@ -56,21 +56,6 @@
 	</div>	
 
 	  
-	<div class="col-xs-2 alert alert-dismissable alert-info col">
-	  <strong>Response time:</strong> <br>
-	  <%
-	  String time = (String)request.getParameter("ctime");
-	  if(time!=null) {
-		  time.toString();
-	  }
-	  else{
-		  %>
-		  sddsasd
-		<%   
-	  }
-	  %>
-	  
-	  
-	</div>
+		
 	  </body>
 	</html>

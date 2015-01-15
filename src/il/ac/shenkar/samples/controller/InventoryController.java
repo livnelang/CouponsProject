@@ -360,6 +360,8 @@ public class InventoryController extends HttpServlet {
 			
 		}
 		
+		// index.jsp 
+		// include.( 
 		
 
 

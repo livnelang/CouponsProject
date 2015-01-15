@@ -109,28 +109,7 @@
    </table>
 </div>
 	
-<div id="time_div" class="col-xs-2 alert alert-dismissable alert-info col">
-	  <strong>Response time:</strong> <br>
-	  
-		<script type="text/javascript"> 
-	  	$( document ).ready(function() {
-	  		var time = <%=request.getAttribute("ctime")%>;
-	  	console.log( time );
-	  	});
-		</script>
-	  <%
-	  String time = null;
-	  time = (String)request.getAttribute("ctime");
-	  System.out.println("controller took:"+time);
-	  if(time!=null) {
-		  %>
-		  
-		<%=  time%>
-		 
-		 <% 
-	  }
-	
-	  %>
+
 </div>
   </body>
 </html>
