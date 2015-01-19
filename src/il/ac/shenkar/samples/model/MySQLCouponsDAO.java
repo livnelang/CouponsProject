@@ -94,9 +94,54 @@ public class MySQLCouponsDAO implements ICouponsDAO
     				coupon_array.add(c);
     				coupons.put(c.getId(),c);
     			}
-    			anotherSession.close();	
+    			anotherSession.close();
+    			// creating DateManager instance 
+    			DateManager da = new DateManager();
+    			// gets updated coupons
+    			coupon_array = da.validatedCoupons(coupon_array);
     			return coupon_array;
     }
+    
+    
+    /**
+     *  Get Coupons By Category
+     *  Using HQL query
+     */
+    @SuppressWarnings("unchecked")
+	public Collection<Coupon> getCategoryCoupons(String catg) throws CouponException 
+    {	
+    			ArrayList<Coupon> coupon_array = new ArrayList<Coupon>();
+    			Collection<Coupon> products = new ArrayList<Coupon>();
+    			try {
+	    			//creating factory for getting sessions
+	    			SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
+	    			//creating a new session for getting all products
+	    			Session anotherSession = factory.openSession();
+	    			anotherSession.beginTransaction();
+	    			// create an hql string for a query
+	    			String hql = "from Coupon where category = :cat";
+	    			// preparing the query from the session
+	    			Query query = anotherSession.createQuery(hql);
+	    			// sete the parameter for the query
+	    			query.setParameter("cat", catg);
+	    			// performin the query and get the list 
+	    			products = query.list();
+	    			System.out.println("There are " + products.size() + " product(s)");
+	    			Iterator i = products.iterator();
+
+	    			anotherSession.close();	
+	    			
+    			}
+    			
+    			catch (HibernateException e) {
+    				System.out.println(e.toString());
+    				e.printStackTrace();
+    			}
+				// returning the category coupons
+    			return products;
+    }	
+    
+    
     
     
     /**

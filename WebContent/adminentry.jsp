@@ -39,7 +39,7 @@
     <h3 class="panel-title">Administrator Entry</h3>
   </div>
   <div class="panel-body">
-	<form action="/CouponsProject/controller/login_request" method="post" class="admin_form">
+	<form action="/CouponsProject/adminController/login_request" method="post" class="admin_form">
             <div class="col-xs-3 user-list">
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>

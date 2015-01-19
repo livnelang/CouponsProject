@@ -35,13 +35,6 @@
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
-          <!--  <ul class="nav navbar-nav navbar-right">
-          <li><p class="navbar-text">2014 Java EE Project</p></li>
-          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
-          
-          </ul>	
-          -->
-
 </nav>	
 </header>
 
@@ -53,14 +46,15 @@
     	<li>Stored Coupons</li>
     	<li class="dropdown pull-right"> 
                 <div class="btn-group">
-			    <button class="btn btn-primary">Select Category</button>
+			    <button class="btn btn-primary">Action</button>
 			    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 			    <span class="caret"></span>
 			    </button>
 			    <ul class="dropdown-menu">
 			    <c:forEach var="cat" items="${catgs}">
-			    <li><a href="#">${cat}</a></li>	
+			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">${cat}</a></li>	
 			    </c:forEach>
+			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">Nearest Coupons</a></li>	
 			    </ul>
 			    </div>
             </ul>

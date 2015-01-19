@@ -1,5 +1,6 @@
 package il.ac.shenkar.samples.model;
 
+import java.io.CharArrayWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -35,28 +36,25 @@ public class ResponseTimerFilter implements Filter {
 	  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 	      throws ServletException, IOException {
 		  String path = ((HttpServletRequest) request).getPathInfo();
+		  PrintWriter out = response.getWriter();
+		  CharResponseWrapper wrapper = new CharResponseWrapper(
+		  (HttpServletResponse)response);  
 	    long startTime = System.currentTimeMillis();
 	    chain.doFilter(request, response);	    
 	    long elapsed = System.currentTimeMillis() - startTime;
-	    // printer Write Out get writer 
-	    PrintWriter out = response.getWriter();
+	    
+	    CharArrayWriter caw = new CharArrayWriter();
+	    caw.write("<div class=\"col-xs-2 alert alert-dismissable alert-info col\">"+
+	    		  "<strong>Response time: "+elapsed+" ms</strong> <br> </div>");
+	    response.setContentLength(caw.toString().getBytes().length);
+	    out = wrapper.getWriter(); 
+		//out.write("hello");
+	    //out.println(wrapper.toString());
 	   // out.println("Time Elapsed: "+elapsed + "ms");
 	    System.out.println("time elapsed: "+elapsed);
-	    out.println("<div class=\"col-xs-2 alert alert-dismissable alert-info col\">"+
+	    out.write("<div class=\"col-xs-2 alert alert-dismissable alert-info col\">"+
 	  "<strong>Response time: "+elapsed+" ms</strong> <br> </div>");
 	  
 	    out.flush();
-	   /* String name = "servlet";
-	    if (request instanceof HttpServletRequest) {
-	      name = ((HttpServletRequest) request).getRequestURI();
-	    }
-	    */
-	    
-	    // Send to Request the time controller had to response
-	   /* request.setAttribute("ctime", elapsed);
-	    ((RequestDispatcher) request).forward(request, response);
-	    System.out.println(request.toString());
-	    config.getServletContext().setAttribute("c_time", elapsed);
-	    config.getServletContext().log(name + " took " + elapsed + " ms");*/
 	  }
 	}

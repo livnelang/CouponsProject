@@ -55,7 +55,7 @@
 			    <span class="caret"></span>
 			    </button>
 			    <ul class="dropdown-menu">
-			    <li><a href="../addcoupon.jsp">Add Coupon</a></li>
+			    <li><a href="/CouponsProject/adminController/addpage">Add Coupon</a></li>
 			    <li><a href="#">Add business</a></li>
 			    <li><a href="#">Change Password</a></li>
 			    </ul>
