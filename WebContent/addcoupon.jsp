@@ -10,8 +10,8 @@
     <title>Coupons Project</title>
 
     <!-- Bootstrap-CSS & General CSS -->
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="./js/jquery-2.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="./js/admin_js.js"></script>
@@ -62,7 +62,7 @@
             </ul>
  	</div>
 	<div class="panel-body">
-	<form name="addForm" class="edit_form" role="form" action="/CouponsProject/controller/addcoupon" method="get" onsubmit="return addCouponValidateForm()">	
+	<form name="addForm" class="edit_form" role="form" action="/CouponsProject/adminController/addcoupon" method="post" onsubmit="return addCouponValidateForm()">	
    	 <div class="form-group col-xs-3 user-list">
       <label for="firstname">Coupon Id</label>
          <input type="text" class="form-control" name="c_id" 

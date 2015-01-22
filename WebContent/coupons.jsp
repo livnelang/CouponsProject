@@ -35,13 +35,6 @@
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
-          <!--  <ul class="nav navbar-nav navbar-right">
-          <li><p class="navbar-text">2014 Java EE Project</p></li>
-          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
-          
-          </ul>	
-          -->
-
 </nav>	
 </header>
 
@@ -53,14 +46,15 @@
     	<li>Stored Coupons</li>
     	<li class="dropdown pull-right"> 
                 <div class="btn-group">
-			    <button class="btn btn-primary">Select Category</button>
+			    <button class="btn btn-primary">Action</button>
 			    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 			    <span class="caret"></span>
 			    </button>
 			    <ul class="dropdown-menu">
 			    <c:forEach var="cat" items="${catgs}">
-			    <li><a href="#">${cat}</a></li>	
+			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">${cat}</a></li>	
 			    </c:forEach>
+			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">Nearest Coupons</a></li>	
 			    </ul>
 			    </div>
             </ul>
@@ -68,44 +62,18 @@
     </ul>
   </div>
    <table class="table">
+
       <th class="col-sm-1">Id</th>
       <th  class="col-sm-1">Name</th class="col-sm-1">
       <th class="col-sm-1">Description</th>
       <th class="col-sm-1">Category</th>
       <th class="col-sm-1">Longitude</th><th class="col-sm-1">Latitude</th>
       <th>Expiration</th><th>Purchase</th>
-      <% 
-      	Collection coupons = (Collection)request.getAttribute("coupons");
-      	if(coupons ==null){
-      		out.write("DB Is Empty ");
-      	}
-     	// if there are coupons & Collection isnt null
-      	else {
-		Iterator iterator = coupons.iterator();
-		while(iterator.hasNext())
-		{
-		Coupon coupon = (Coupon)iterator.next();
-		%>
-		<tr>
-		<td><%= coupon.getId() %></td>
-		<td><%= coupon.getName() %></td>
-		<td><%= coupon.getDescription() %></td>
-		<td><%= coupon.getCategory() %></td>
-		<td><%= coupon.getLongitude() %></td>
-		<td><%= coupon.getLatitude() %></td>
-		<td><%= coupon.getDate() %></td>
-		<td><a href="/CouponsProject/controller/mycart?c_id=<%= coupon.getId() %>">Add To Cart</a></td>
-		</tr>
-	
-		<% 
-		}
-		%>
-
-	 <% 
-		 }
-      	%>
-
-
+         
+    <%@ taglib uri="/WEB-INF/tld/db_coupons.tld" prefix="abelski" %>	
+   <abelski:getcouponstag coupons="${coupons}">
+   </abelski:getcouponstag> 
+     
    </table>
 </div>
 	

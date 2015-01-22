@@ -6,7 +6,7 @@ $(document).ready(function(){
 	 while(size>0) {
 		current_button = buttons[size-1];
 		current_button.addEventListener('click', function () {
-		location.href="/CouponsProject/controller/edit_coupon?c_id="+this.name;
+		location.href="/CouponsProject/adminController/edit_coupon?c_id="+this.name;
 		});
 		size = size-1;
 	 }
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	 while(size>0) {
 		current_button = buttons[size-1];
 		current_button.addEventListener('click', function () {
-		location.href="/CouponsProject/controller/deletecoupon?c_id="+this.name;
+		location.href="/CouponsProject/adminController/deletecoupon?c_id="+this.name;
 		});
 		size = size-1;
 	 }

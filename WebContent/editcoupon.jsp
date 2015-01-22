@@ -62,7 +62,7 @@
   </div>
 	
 	<div class="panel-body">
-	<form class="edit_form" role="form" action="/CouponsProject/controller/updatecoupon" method="get">	
+	<form class="edit_form" role="form" action="/CouponsProject/adminController/updatecoupon" method="post">	
    <div class="form-group col-xs-3 user-list">
       <label for="coupon_name">Coupon Name</label>
          <input type="text" class="form-control" name="c_name" 

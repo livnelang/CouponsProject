@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=windows-1255"
     import="java.util.*,il.ac.shenkar.samples.model.*" 
     pageEncoding="windows-1255"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,9 +12,10 @@
 
     <!-- Bootstrap-CSS & General CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="../js/admin_js.js"></script>
   </head>
   
 <!--  Body Content -->
@@ -33,20 +35,30 @@
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
-          <!--  <ul class="nav navbar-nav navbar-right">
-          <li><p class="navbar-text">2014 Java EE Project</p></li>
-          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
-          
-          </ul>	
-          -->
-
 </nav>	
 </header>		
 
 <!-- BootStrap Panel Table Showing Our Coupons -->
 <div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
-    <h3 class="panel-title">My Coupons</h3>
+    <ul class="admin-ul">
+    	<li>Stored Coupons</li>
+    	<li class="dropdown pull-right"> 
+                <div class="btn-group">
+			    <button class="btn btn-primary">Select Category</button>
+			    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			    <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu">
+			    <c:forEach var="cat" items="${catgs}">
+			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">${cat}</a></li>	
+			    </c:forEach>
+			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">Nearest Coupons</a></li>	
+			    </ul>
+			    </div>
+            </ul>
+        </li>
+    </ul>
   </div>
    <table class="table">
       <th class="col-sm-1">Coupon Name</th><th  class="col-sm-1">Description</th class="col-sm-1"><th class="col-sm-1">Quantity</th>
