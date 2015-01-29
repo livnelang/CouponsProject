@@ -69,7 +69,7 @@
             placeholder="Enter Id">
    	</div>
    
-   <div class="form-group col-xs-3 user-list">
+   <div class="form-group col-sm-2 user-list">
       <label for="firstname">Coupon Name</label>
          <input type="text" class="form-control" name="c_name" 
             placeholder="Enter Name">
@@ -101,7 +101,7 @@
 			        	<span id="time_click" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 			         	</span>
 			         	</div>
-			  		</div>
+			  		</div>	
 
   		
    <div class="form-group col-xs-3 user-list">

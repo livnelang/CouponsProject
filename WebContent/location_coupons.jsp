@@ -1,12 +1,64 @@
-<%@ page language="java" contentType="text/html; charset=windows-1255"
-    pageEncoding="windows-1255"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1255">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coupons Project</title>
 
+    <!-- Bootstrap-CSS & General CSS -->
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+     <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  	</head>
+  	
+<body>
+  <header>
+<!-- The Navigation Bar -->
+<nav class="navbar navbar-default" role="navigation">
+   <div class="navbar-header">
+      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
+   </div>
+
+      <ul class="nav navbar-nav">
+         <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
+         <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
+         <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
+          <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
+          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          </ul>
+</nav>	
+	</header>
+	
+	
+<div class="panel panel-info coupouns_panel">
+  <div class="panel-heading">
+    <h3 class="panel-title">GeoLocation Coupons</h3>
+  </div>
+  <div class="panel-body">
+	<form action="/CouponsProject/controller/location" method="post" class="admin_form">
+            <div class="col-xs-3 user-list">
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-cloud"></span></span>
+                    <input type="text" name="longitude" class="form-control" placeholder="Longitude">
+                </div>
+            </div>
+            <div class="col-xs-3 user-list">
+                <div class="input-group">
+                	<span class="input-group-addon"><span class="glyphicon glyphicon-cloud"></span></span>
+                    <input type="text" name="latitude" class="form-control" placeholder="Latitude">
+                </div>
+            </div>
+             <div class="col-xs-3 user-list">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+    </form>	
+   </div>
+    </div>
+
+    
 </body>
 </html>

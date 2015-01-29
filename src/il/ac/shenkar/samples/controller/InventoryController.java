@@ -4,6 +4,7 @@ package il.ac.shenkar.samples.controller;
 import il.ac.shenkar.samples.model.Coupon;
 import il.ac.shenkar.samples.model.CouponException;
 import il.ac.shenkar.samples.model.InventoryException;
+import il.ac.shenkar.samples.model.LocationManager;
 import il.ac.shenkar.samples.model.MD5Manager;
 import il.ac.shenkar.samples.model.MySQLCouponsDAO;
 import il.ac.shenkar.samples.model.ShoppingCart;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -234,8 +236,7 @@ public class InventoryController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
+
 		
 		/**
 		 * Redirects to 404 page 
@@ -251,7 +252,46 @@ public class InventoryController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+		String path = request.getPathInfo();
+		RequestDispatcher dispatcher = null;
+		
+		
+		/**
+		 * Get Client request to find coupons 
+		 * By Location,
+		 * paramters expected: longitude, latitude
+		 */
+		if(path.endsWith("location")) {
+			float ltude;
+			float lat;
+			ArrayList<Coupon> coupon_array = new ArrayList<Coupon>();
+			LocationManager locman = new LocationManager();
+			try {
+				ltude = Float.parseFloat(request.getParameter("longitude"));
+				lat = Float.parseFloat(request.getParameter("latitude"));
+				MySQLCouponsDAO inventory =  (MySQLCouponsDAO) getServletContext().getAttribute("inventory");
+				coupon_array = (ArrayList<Coupon>) locman.Compute_Distance(inventory.getCoupons(), ltude, lat);
+				request.setAttribute("coupons", coupon_array);
+				request.setAttribute("distances", locman.getDistance_array());
+				//request.setAttribute("catgs", inventory.getCategories());
+				dispatcher = getServletContext().getRequestDispatcher("/location_view.jsp");
+				dispatcher.forward(request, response);
+			}
+			catch (CouponException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		/**
+		 * Redirects to 404 page 
+		 */
+		else {
+			dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

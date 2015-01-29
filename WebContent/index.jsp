@@ -28,7 +28,6 @@
 		  	<ul class="nav navbar-nav">
 			 <li><a href="/CouponsProject/controller/coupons">Available Coupons</a></li>
 			 <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
-			 <li><a href="/CouponsProject/controller/location_coupons">Coupons By Location</a></li>
 			 <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
 			  <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
 			  <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
