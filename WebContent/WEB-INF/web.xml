@@ -5,15 +5,26 @@
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
-  <!--  <filter>
-    <filter-name>ResponseTimerFilter</filter-name>
+  <servlet>
+  <servlet-name>control</servlet-name>
+  <servlet-class>il.ac.shenkar.samples.controller.InventoryController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>control</servlet-name>
+  <url-pattern>/controller/*</url-pattern>
+  </servlet-mapping>
+  
+  
+  <filter>
+    <filter-name>myfilter</filter-name>
     <filter-class>il.ac.shenkar.samples.model.ResponseTimerFilter</filter-class>
-</filter>
-<filter-mapping>
-      <filter-name>ResponseTimerFilter</filter-name>
-      <url-pattern>/controller/*</url-pattern>
+	</filter>
+	<filter-mapping>
+      <filter-name>myfilter</filter-name>
+      <servlet-name>control</servlet-name>
    </filter-mapping>
-   -->
+  
 
 
 

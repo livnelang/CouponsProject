@@ -37,26 +37,28 @@ public class ResponseTimerFilter implements Filter {
 	      throws ServletException, IOException {
 		  String path = ((HttpServletRequest) request).getPathInfo();
 		  PrintWriter out = response.getWriter();
-		  out.println("hello world");
-		  CharResponseWrapper wrapper = new CharResponseWrapper(
-		  (HttpServletResponse)response);  
+		  out.write("<!DOCTYPE html>"+
+		  "<html lang=\"en\">"+
+		  "<head>"+
+		    "<meta charset=\"utf-8\">"+
+		    "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">"+
+		    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"+
+		    "<title>Coupons Project</title>"+
+
+		    "<!-- Bootstrap-CSS & General CSS -->"+
+		   "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/bootstrap.css\">"+
+		    "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/style.css\">"+
+		    "<script src=\"../js/jquery-2.1.1.min.js\"></script>"+
+		    "<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js\"></script>"+
+		    "<script src=\"../js/admin_js.js\"></script>"+
+		    "</head>");
+
 	    long startTime = System.currentTimeMillis();
 	    chain.doFilter(request, response);	    
 	    long elapsed = System.currentTimeMillis() - startTime;
-	    
-	    CharArrayWriter caw = new CharArrayWriter();
-	    caw.write("<div class=\"col-xs-2 alert alert-dismissable alert-info col\">"+
-	    		  "<strong>Response time: "+elapsed+" ms</strong> <br> </div>");
-	    response.setContentLength(caw.toString().getBytes().length);
-	    out = wrapper.getWriter();
-	    out = response.getWriter();
-		//out.write("hello");
-	    //out.println(wrapper.toString());
-	   // out.println("Time Elapsed: "+elapsed + "ms");
 	    System.out.println("time elapsed: "+elapsed);
 	    out.write("<div class=\"col-xs-2 alert alert-dismissable alert-info col\">"+
 	  "<strong>Response time: "+elapsed+" ms</strong> <br> </div>");
-	  
 	    out.flush();
 	  }
 	}

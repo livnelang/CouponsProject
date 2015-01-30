@@ -34,7 +34,7 @@ import org.apache.log4j.BasicConfigurator;
 /**
  * Servlet implementation class InventoryController
  */
-@WebServlet("/controller/*")
+//@WebServlet("/controller/*")
 public class InventoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static int count = 0;
@@ -93,7 +93,7 @@ public class InventoryController extends HttpServlet {
 				request.setAttribute("coupons", inventory.getCoupons());
 				request.setAttribute("catgs", inventory.getCategories());
 				dispatcher = getServletContext().getRequestDispatcher("/coupons.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.include(request, response);
 			}
 			/*catch(InventoryException e) {
 				dispatcher = getServletContext().getRequestDispatcher("/error.jsp");
@@ -128,7 +128,7 @@ public class InventoryController extends HttpServlet {
 			
 			catch (CouponException e) {
 				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.include(request, response);
 				e.printStackTrace();
 			}
 			
@@ -173,7 +173,7 @@ public class InventoryController extends HttpServlet {
 			
 			// Going to turn it to mycoupons.jsp page and show purchased coupons
 			dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
-			dispatcher.forward(request, response);
+			dispatcher.include(request, response);
 		}
 		
 		/**
@@ -187,7 +187,7 @@ public class InventoryController extends HttpServlet {
 			}
 			
 			dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
-			dispatcher.forward(request, response);
+			dispatcher.include(request, response);
 		}
 		
 		
@@ -206,7 +206,7 @@ public class InventoryController extends HttpServlet {
 			}
 			
 			dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
-			dispatcher.forward(request, response);
+			dispatcher.include(request, response);
 		}
 
 		/**
@@ -226,7 +226,7 @@ public class InventoryController extends HttpServlet {
 				}
 					else {
 						dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-						dispatcher.forward(request, response);
+						dispatcher.include(request, response);
 					}
 				}
 			
@@ -275,7 +275,7 @@ public class InventoryController extends HttpServlet {
 				request.setAttribute("distances", locman.getDistance_array());
 				//request.setAttribute("catgs", inventory.getCategories());
 				dispatcher = getServletContext().getRequestDispatcher("/location_view.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.include(request, response);
 			}
 			catch (CouponException e) {
 				// TODO Auto-generated catch block
