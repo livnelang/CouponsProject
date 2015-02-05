@@ -1,4 +1,3 @@
-<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=windows-1255"
     import="java.util.*,il.ac.shenkar.samples.model.*"
     pageEncoding="windows-1255"%>
@@ -15,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="../js/admin_js.js"></script>
   </head>
   
 <!--  Body Content -->
@@ -60,21 +59,23 @@
 			    <c:forEach var="cat" items="${catgs}">
 			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">${cat}</a></li>	
 			    </c:forEach>
-			    <li><a href="/CouponsProject/location_coupons.jsp">Nearest Coupons</a></li>	
 			    </ul>
 			    </div>
-            </ul>
-        </li>
-    </ul>
-  </div>
+         </li>
+         </ul>
+  	</div>
+  	
    <table class="table">
-
+	<tr>
       <th class="col-sm-1">Id</th>
-      <th  class="col-sm-1">Name</th class="col-sm-1">
+      <th  class="col-sm-1">Name</th>
       <th class="col-sm-1">Description</th>
       <th class="col-sm-1">Category</th>
-      <th class="col-sm-1">Longitude</th><th class="col-sm-1">Latitude</th>
-      <th>Expiration</th><th>Purchase</th>
+      <th class="col-sm-1">Longitude</th>
+      <th class="col-sm-1">Latitude</th>
+      <th>Expiration</th>
+      <th>Purchase</th>
+      </tr>
          
     <%@ taglib uri="/WEB-INF/tld/db_coupons.tld" prefix="abelski" %>	
    <abelski:getcouponstag coupons="${coupons}">
@@ -84,6 +85,5 @@
 </div>
 	
 
-</div>
   </body>
 </html>

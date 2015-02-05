@@ -60,7 +60,6 @@
 			    <li><a href="#">Change Password</a></li>
 			    </ul>
 			    </div>
-            </ul>
         </li>
     </ul>
   </div>

@@ -41,7 +41,8 @@ public class InventoryController extends HttpServlet {
 	private static String client_name=null;
 	private static String client_id=null;
 	private boolean admincredit = false;
-	private Logger logger=null;
+	static Logger logger = Logger.getLogger(InventoryController.class);  		  // Main Logger
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -61,7 +62,7 @@ public class InventoryController extends HttpServlet {
 			getServletContext().setAttribute("inventory", MySQLCouponsDAO.getInstance());
 			logger = Logger.getRootLogger();
 			BasicConfigurator.configure();
-			logger.setLevel(Level.OFF);
+			logger.info("InventoryController In Construction .. ");
 			} 
     	catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -74,6 +75,7 @@ public class InventoryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		logger.info("called http GetMethod - Referer Is : +"+ request.getHeader("referer"));
 		String path = request.getPathInfo();
 		//logger.info("Request has come, path: "+path);
 		RequestDispatcher dispatcher = null;
@@ -123,7 +125,7 @@ public class InventoryController extends HttpServlet {
 				}
 				request.setAttribute("catgs", inventory.getCategories());
 				dispatcher = getServletContext().getRequestDispatcher("/coupons.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.include(request, response);
 			}
 			
 			catch (CouponException e) {

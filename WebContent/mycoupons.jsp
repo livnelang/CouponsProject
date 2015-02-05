@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="../js/jquery-2.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script src="../js/admin_js.js"></script>
   </head>
   
@@ -57,11 +58,11 @@
 			    </ul>
 			    </div>
             </ul>
-        </li>
-    </ul>
   </div>
    <table class="table">
+   <tr>
       <th class="col-sm-1">Coupon Name</th><th  class="col-sm-1">Description</th class="col-sm-1"><th class="col-sm-1">Quantity</th>
+      </tr>
       <% 
       	System.out.println("inside mycoupons.jsp: "+cart);
       	
