@@ -6,6 +6,8 @@ Library 1.2//EN"
 <tlib-version>1.2</tlib-version>
 <jsp-version>2.0</jsp-version>
 <short-name>mytags</short-name>
+
+<!-- GetCoupons Tag -->
 <tag>
 <name>getcouponstag</name>
 <tag-class>il.ac.shenkar.samples.model.GetCouponsTag</tag-class>
@@ -15,6 +17,20 @@ Library 1.2//EN"
 <required>true</required>
 <rtexprvalue>true</rtexprvalue>
 <description>Coupons From DB</description>
+</attribute>
+
+</tag>
+
+<!-- HttpSessions Tag -->
+<tag>
+<name>sessionstag</name>
+<tag-class>il.ac.shenkar.samples.model.SessionsTag</tag-class>
+<body-content>scriptless</body-content>
+<attribute>
+<name>sessions</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+<description>Active Sessions Output</description>
 </attribute>
 
 </tag>

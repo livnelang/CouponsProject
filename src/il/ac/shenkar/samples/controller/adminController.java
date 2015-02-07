@@ -1,5 +1,6 @@
 package il.ac.shenkar.samples.controller;
 
+import il.ac.shenkar.samples.listeners.SessionCounterListener;
 import il.ac.shenkar.samples.model.Coupon;
 import il.ac.shenkar.samples.model.CouponException;
 import il.ac.shenkar.samples.model.MD5Manager;
@@ -146,6 +147,40 @@ public class adminController extends HttpServlet {
 			}
 		}
 		
+		
+		/**
+		 * If Admin want to see All Active Sessions
+		 * Then redirect him to sessions.jsp page
+		 */
+		if(path.endsWith("activesessions"))
+		{
+			try {
+				// checks whether the admin is logged or not
+				if(admincredit){
+				HttpSession session = request.getSession();
+				// Gets All Http Sessions & send back to request
+				
+				SessionCounterListener sl = new SessionCounterListener();
+				
+				request.setAttribute("sessions", SessionCounterListener.getActivesessions());
+				System.out.print("after setting sessions");
+				dispatcher = getServletContext().getRequestDispatcher("/sessions.jsp");
+				dispatcher.include(request, response);
+				}
+					else {
+						dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+						dispatcher.forward(request, response);
+					}
+					
+				}
+			catch (Exception e) {
+				dispatcher = getServletContext().getRequestDispatcher("/404.jsp");
+				dispatcher.forward(request, response);
+				e.printStackTrace();
+			}
+			
+		}
+		
 	}
 
 	
@@ -159,6 +194,7 @@ public class adminController extends HttpServlet {
 		
 		/**
 		 * Take care of Admin attempt to enter the system
+		 * If Details Are Correct -> put True value in 'admincredit' field
 		 */
 		if(path.endsWith("login_request")) {
 			
@@ -172,7 +208,10 @@ public class adminController extends HttpServlet {
 				}
 			// if return false --> then redirect to errorPage
 				else {
-					dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+					// set the request page a false variable attempt
+					// & redirect to try again
+					request.setAttribute("login_failed", -1);
+					dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
 					dispatcher.forward(request, response);
 				}
 			
@@ -185,10 +224,22 @@ public class adminController extends HttpServlet {
 				dispatcher.forward(request, response);
 				}
 			
+			// if return false --> then redirect to errorPage
+			else {
+				// set the request page a false variable attempt
+				// & redirect to try again
+				request.setAttribute("login_failed", -1);
+				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+				dispatcher.forward(request, response);
+			}
+			
 			}
 			catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// set the request page a false variable attempt
+				// & redirect to try again
+				request.setAttribute("login_failed", -1);
+				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+				dispatcher.include(request, response);
 			}
 			
 			

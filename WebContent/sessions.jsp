@@ -1,9 +1,6 @@
-<%@page import="java.io.PrintWriter"%>
-<%@page import="java.io.Console"%>
 <%@ page language="java" contentType="text/html; charset=windows-1255"
-    import="java.util.*,il.ac.shenkar.samples.model.*,java.text.DecimalFormat"
+    import="java.util.*,il.ac.shenkar.samples.model.*"
     pageEncoding="windows-1255"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +18,7 @@
   </head>
   
 <!--  Body Content -->
-  <body>
+<body>
   <header>
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
@@ -36,58 +33,32 @@
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
           <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
+          <!--  <ul class="nav navbar-nav navbar-right">
+          <li><p class="navbar-text">2014 Java EE Project</p></li>
+          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          
+          </ul>	
+          -->
+
 </nav>	
-</header>
-
-<!-- BootStrap Panel Table Showing Our Coupons -->
-
+	</header>
+	
+	<!-- BootStrap Panel Table Showing Our Coupons -->
 <div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
-    <ul class="admin-ul">
-    	<li>Coupons Next To You </li>
+  	<ul class="admin-ul">
+    	<li>Active Http Sessions</li>
     </ul>
   </div>
    <table class="table">
-	<tr>
-      <th class="col-sm-1">Id</th>
-      <th  class="col-sm-1">Name</th>
-      <th class="col-sm-1">Description</th>
-      <th class="col-sm-1">Category</th>
-      <th class="col-sm-1">Longitude</th>
-      <th class="col-sm-1">Latitude</th>
-      <th class="col-sm-1">Distance</th>
-      <th>Expiration</th><th>Purchase</th>
-     </tr>
-      
-     <% 
-     	Collection<Double> dist = (Collection<Double>)request.getAttribute("distances");
-     	Iterator iterator = dist.iterator();
-     	Double d;
-     %>         
-    <c:forEach var="cpn" items="${coupons}">
-    <tr>
-    <td>${cpn.getId()}</td>
-    <td>${cpn.getName()}</td>
-    <td>${cpn.getDescription()}</td>
-    <td>${cpn.getCategory()}</td>
-    <td>${cpn.getLongitude()}</td>
-    <td>${cpn.getLatitude()}</td>
-    <td style="font-weight: bold; color:brown;">
-    	<%d=(Double)iterator.next();
-    	  DecimalFormat df = new DecimalFormat("#.##");  
-    	  d=Double.valueOf( df.format(d) );
-    	%>
-    	
-    	<%=d %>
-    </td>
-    <td>${cpn.getDate()}</td>
-   	<td><a href=/CouponsProject/controller/mycart?c_id=${cpn.getId()}>Add To Cart</a></td>
-    </tr>
-    </c:forEach>
-     
+    
+    <%@ taglib uri="/WEB-INF/tld/db_coupons.tld" prefix="abelski" %>	
+   <abelski:sessionstag sessions="${sessions}"  >
+    </abelski:sessionstag> 
+
    </table>
 </div>
-	
 
-  </body>
+
+</body>
 </html>

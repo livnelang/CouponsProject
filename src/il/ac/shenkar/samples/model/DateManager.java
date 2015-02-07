@@ -41,24 +41,15 @@ public class DateManager {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
 		// Global CurrentDate var
 		Date currentdate = null;
-		try {
-			// will be our current date
-			for (Coupon coupon : cpns) {
-				currentdate =  simpleDateFormat.parse(currentimeStamp);
-				String cr = currentdate.toString();
-				String cd = coupon.getDate().toString();
-				// now ready to compare
-				boolean r = coupon.getDate().after(currentdate);
-				if( r  ) {
-					coupon_array.add(coupon);
-				}
+		// will be our current date
+		for (Coupon coupon : cpns) {
+			// current time
+			currentdate =  new Date();
+			// now ready to compare
+			boolean r = coupon.getDate().after(currentdate);
+			if( r   ) {
+				coupon_array.add(coupon);
 			}
-			
-		}
-		
-		catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		

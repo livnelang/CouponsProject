@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=windows-1255"
+    import="java.util.*,il.ac.shenkar.samples.model.*"
+    pageEncoding="windows-1255"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,23 +42,55 @@
     <h3 class="panel-title">Administrator Entry</h3>
   </div>
   <div class="panel-body">
-	<form action="/CouponsProject/adminController/login_request" method="post" class="admin_form">
-            <div class="col-xs-3 user-list">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                    <input type="text" name="name" class="form-control" placeholder="Username">
-                </div>
-            </div>
-            <div class="col-xs-3 user-list">
-                <div class="input-group">
-                	<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" name="pwd" class="form-control" placeholder="Password">
-                </div>
-            </div>
-             <div class="col-xs-3 user-list">
-            <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-    </form>	
+  	<div id="lefted_form">
+		<form action="/CouponsProject/adminController/login_request" method="post" class="admin_form">
+	            <div class="col-xs-6 user-list">
+	                <div class="input-group">
+	                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+	                    <input type="text" name="name" class="form-control" placeholder="Username">
+	                </div>
+	            </div>
+	            <div class="col-xs-6 user-list">
+	                <div class="input-group">
+	                	<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+	                    <input type="password" name="pwd" class="form-control" placeholder="Password">
+	                </div>
+	            </div>
+	             <div class="col-xs-3 user-list">
+	            <button type="submit" class="btn btn-primary">Login</button>
+	            </div>
+	    </form>	
+    </div>
+    	
+    	<article id="admin_response">
+    	</article>
+    	<%
+    	int  access  = 0 ;
+    	try {
+	    	Object o = request.getAttribute("login_failed") ;
+	    	access = (Integer.parseInt(o.toString()));
+    		}
+    	
+    	catch (Exception e) {
+			// set the request page a false variable attempt
+			// & redirect to try again
+			e.printStackTrace();
+		}
+	    	if ( access < 0 ) {	
+	    		%>
+	    		<script>
+	    		window.onload = function() {
+	    		console.log("attempt failed");
+	    		document.getElementById("admin_response").style.backgroundImage  = "url('../img/access_denied.png')";
+	    			}
+	    	
+    		</script>
+    		
+    		<% 
+    		
+    	}
+    	%>
+    
    </div>
     </div>
 

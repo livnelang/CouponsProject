@@ -42,7 +42,7 @@
 <div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
     <ul class="admin-ul">
-    	<li>Stored Coupons</li>
+    	<li>Available Coupons</li>
     		<li class="dropdown pull-right">
 			   <a href="/CouponsProject/location_coupons.jsp">
 			   <button class="btn btn-primary">Locate Coupons</button>

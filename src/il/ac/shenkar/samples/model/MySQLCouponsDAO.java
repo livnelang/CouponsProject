@@ -67,7 +67,10 @@ public class MySQLCouponsDAO implements ICouponsDAO
         }
         return instance;
     }
-
+    
+    /**
+     * Private Constructor
+     */
     private MySQLCouponsDAO() {
     	coupons = new HashMap<Integer, Coupon>();
     }

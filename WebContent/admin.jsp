@@ -48,6 +48,13 @@
   <div class="panel-heading">
   	<ul class="admin-ul">
     	<li>Admin Control Panel</li>
+    	
+    	<li class="dropdown pull-right">
+			   <a href="/CouponsProject/adminController/activesessions">
+			   <button class="btn btn-primary">Active Sessions</button>
+			   </a>
+			 </li>
+    	
     	<li class="dropdown pull-right"> 
                 <div class="btn-group">
 			    <button class="btn btn-primary">Action</button>

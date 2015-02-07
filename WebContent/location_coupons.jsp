@@ -39,23 +39,27 @@
     <h3 class="panel-title">GeoLocation Coupons</h3>
   </div>
   <div class="panel-body">
-	<form action="/CouponsProject/controller/location" method="post" class="admin_form">
-            <div class="col-xs-3 user-list">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-cloud"></span></span>
-                    <input type="text" name="longitude" class="form-control" placeholder="Longitude">
-                </div>
-            </div>
-            <div class="col-xs-3 user-list">
-                <div class="input-group">
-                	<span class="input-group-addon"><span class="glyphicon glyphicon-cloud"></span></span>
-                    <input type="text" name="latitude" class="form-control" placeholder="Latitude">
-                </div>
-            </div>
-             <div class="col-xs-3 user-list">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-    </form>	
+  <div id="lefted_form">
+		<form action="/CouponsProject/controller/location" method="post" class="admin_form">
+	            <div class="col-xs-7 user-list">
+	                <div class="input-group">
+	                    <span class="input-group-addon"><span class="glyphicon glyphicon-cloud"></span></span>
+	                    <input type="number" name="longitude" required class="form-control" placeholder="Longitude">
+	                </div>
+	            </div>
+	            <div class="col-xs-7 user-list">
+	                <div class="input-group">
+	                	<span class="input-group-addon"><span class="glyphicon glyphicon-cloud"></span></span>
+	                    <input type="number" name="latitude" required class="form-control" placeholder="Latitude">
+	                </div>
+	            </div>
+	             <div class="col-xs-3 user-list">
+	            <button type="submit" class="btn btn-primary">Submit</button>
+	            </div>
+	    </form>	
+    </div>
+    	<article id="located_article">
+    	</article>
    </div>
     </div>
 

@@ -60,9 +60,9 @@ public class InventoryController extends HttpServlet {
     public void init() {
     	try {
 			getServletContext().setAttribute("inventory", MySQLCouponsDAO.getInstance());
-			logger = Logger.getRootLogger();
-			BasicConfigurator.configure();
-			logger.info("InventoryController In Construction .. ");
+			logger.info(new Date().toString());
+			logger.info("InventoryController In Construction ..");
+			logger.info(" ");
 			} 
     	catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -75,9 +75,10 @@ public class InventoryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.info("called http GetMethod - Referer Is : +"+ request.getHeader("referer"));
 		String path = request.getPathInfo();
-		//logger.info("Request has come, path: "+path);
+		if (path !=null  ) {
+		logger.info("http GetMethod - Referer Is :"+ request.getHeader("referer"));
+		}
 		RequestDispatcher dispatcher = null;
 
 		count++;
@@ -88,7 +89,6 @@ public class InventoryController extends HttpServlet {
 		 */	
 		if(path.endsWith("coupons"))
 		{
-			
 			try {
 				MySQLCouponsDAO inventory =  (MySQLCouponsDAO) getServletContext().getAttribute("inventory");
 				
@@ -186,6 +186,14 @@ public class InventoryController extends HttpServlet {
 			HttpSession session = request.getSession();
 			if(session.getAttribute("cart")==null) {
 				System.out.println("null cart");
+			}
+			
+			// Check whether wev'e got a cart in session, if we do then update validate coupons
+			if ( session.getAttribute("cart")!=null )  {
+				// get cart from session
+				ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+				// update lines
+				cart.update_lines();
 			}
 			
 			dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");

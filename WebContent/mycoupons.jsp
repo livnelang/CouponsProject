@@ -43,7 +43,7 @@
 <div class="panel panel-primary coupouns_panel">
   <div class="panel-heading">
     <ul class="admin-ul">
-    	<li>Stored Coupons</li>
+    	<li>My Shopping Cart</li>
     	<li class="dropdown pull-right"> 
                 <div class="btn-group">
 			    <button class="btn btn-primary">Select Category</button>
@@ -54,7 +54,6 @@
 			    <c:forEach var="cat" items="${catgs}">
 			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">${cat}</a></li>	
 			    </c:forEach>
-			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">Nearest Coupons</a></li>	
 			    </ul>
 			    </div>
             </ul>

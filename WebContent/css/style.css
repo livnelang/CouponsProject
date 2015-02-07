@@ -144,3 +144,29 @@ header {
 	color: #FFF;
 	
 }
+
+#lefted_form {
+	float:left;
+	width:40%;
+}
+
+#admin_response {
+	background-image: url('../img/login_icon.png');
+    background-repeat: no-repeat;
+    margin-left:80px;
+    width:202px;
+    height:168px;
+    position:relative;
+    float:left;
+}
+
+#located_article {
+	background-image: url('../img/Find_Location.png');
+    background-repeat: no-repeat;
+    margin-left:40px;
+    width:300px;
+    height:219px;
+    position:relative;
+    float:left;
+    
+}

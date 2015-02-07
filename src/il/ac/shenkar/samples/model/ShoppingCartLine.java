@@ -36,6 +36,12 @@ public class ShoppingCartLine {
 	{
 		return this.amount;
 	}
+
+	@Override
+	public String toString() {
+		return "ShoppingCartLine [c1=" + c1 + ", amount=" + amount + "]";
+	}
+	
 	
 
 	

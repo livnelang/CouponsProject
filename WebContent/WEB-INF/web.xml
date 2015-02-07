@@ -25,6 +25,9 @@
       <servlet-name>control</servlet-name>
    </filter-mapping>
   
+  	<listener>
+		<listener-class>il.ac.shenkar.samples.listeners.SessionCounterListener</listener-class>
+	</listener>
 
 
 
