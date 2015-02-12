@@ -271,22 +271,27 @@ public class adminController extends HttpServlet {
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
 				Date d = simpleDateFormat.parse(request.getParameter("exp_date"));
 				c1 = new Coupon(_id,name,desc,catg,ltude,latude,d);
-			}
-			
-			catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			try {
+				
 				request.setAttribute("addcoupon", MySQLCouponsDAO.getInstance().addCoupon(c1));
 				if( (boolean) request.getAttribute("addcoupon")) {
 					logger.info("Coupon id: "+request.getParameter("c_id")+" was added !");
 				}
 				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
 				dispatcher.forward(request, response);
-			} catch (CouponException e) {
-				// TODO Auto-generated catch block	
+			}
+			
+			catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				logger.info("Problem With New Coupon variables: "+e1.toString());
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+
+			 catch (CouponException e) {
+				logger.info("Problem With Adding A New Coupon");
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+				dispatcher.forward(request, response);
 				e.printStackTrace();
 			}
 			

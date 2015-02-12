@@ -97,11 +97,9 @@ public class InventoryController extends HttpServlet {
 				dispatcher = getServletContext().getRequestDispatcher("/coupons.jsp");
 				dispatcher.include(request, response);
 			}
-			/*catch(InventoryException e) {
-				dispatcher = getServletContext().getRequestDispatcher("/error.jsp");
-				dispatcher.forward(request,response);
-			}*/ catch (CouponException e) {
-				// TODO Auto-generated catch block
+			catch (CouponException e) {
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+				dispatcher.include(request, response);
 				e.printStackTrace();
 			}		
 		}

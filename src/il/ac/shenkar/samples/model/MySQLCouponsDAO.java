@@ -1,5 +1,6 @@
 package il.ac.shenkar.samples.model;
 
+import il.ac.shenkar.samples.controller.InventoryController;
 import il.ac.shenkar.samples.model.MySQLCouponsDAO;
 
 import java.sql.Connection;
@@ -26,6 +27,7 @@ import java.util.Map;
 import javax.transaction.SystemException;
 import javax.transaction.Transaction;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -39,6 +41,8 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class MySQLCouponsDAO implements ICouponsDAO
 {
 	private Map<Integer,Coupon> coupons;
+	static Logger logger = Logger.getLogger(InventoryController.class);  		  // Main Logger
+
 
 	
     static
@@ -80,7 +84,9 @@ public class MySQLCouponsDAO implements ICouponsDAO
      */
     public Collection<Coupon> getCoupons() throws CouponException 
     {
+    	
     			ArrayList<Coupon> coupon_array = new ArrayList<Coupon>();
+    		try {	
     			//creating factory for getting sessions
     			SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
    
@@ -98,6 +104,13 @@ public class MySQLCouponsDAO implements ICouponsDAO
     				coupons.put(c.getId(),c);
     			}
     			anotherSession.close();
+    		}
+    		catch (HibernateException e) {
+				System.out.println(e.toString());
+				logger.info("MySQL Exception: "+ e.toString());  	
+				e.printStackTrace();
+			}
+    		
     			// creating DateManager instance 
     			DateManager da = new DateManager();
     			// gets updated coupons
@@ -138,6 +151,7 @@ public class MySQLCouponsDAO implements ICouponsDAO
     			
     			catch (HibernateException e) {
     				System.out.println(e.toString());
+    				logger.info("MySQL Exception: "+ e.toString());  	
     				e.printStackTrace();
     			}
 				// returning the category coupons
@@ -152,13 +166,14 @@ public class MySQLCouponsDAO implements ICouponsDAO
      */
     public boolean addCoupon(Coupon ob) throws CouponException
     {
+    	try
+        {
     		//creating factory for getting sessions
     		SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
     		//creating a new session for getting all products
     		Session anotherSession = factory.openSession();
     		anotherSession.beginTransaction();
-        try
-        {
+        
         	anotherSession.save(ob);
         	anotherSession.getTransaction().commit();
         	anotherSession.close();
@@ -166,10 +181,9 @@ public class MySQLCouponsDAO implements ICouponsDAO
         }
         catch(HibernateException e)
         {
-        	
+			logger.info("MySQL Exception: "+ e.toString());  	
             e.printStackTrace();
-           // throw new CouponException("problem with adding a coupon");
-            return false;
+            throw new CouponException("problem with adding a coupon");
         }
        
         return true;
@@ -275,25 +289,27 @@ public class MySQLCouponsDAO implements ICouponsDAO
      */
     public boolean updateCoupon(Coupon coupon) throws CouponException
     {
-    	//creating factory for getting sessions
-    	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
-    	//creating a new session for getting all products
-    	Session anotherSession = factory.openSession();
-    	anotherSession.beginTransaction();
+    	 try
+         {
+	    	//creating factory for getting sessions
+	    	SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
+	    	//creating a new session for getting all products
+	    	Session anotherSession = factory.openSession();
+	    	anotherSession.beginTransaction();
     	    
-        try
-        {
+       
         	anotherSession.update(coupon);
         	anotherSession.getTransaction().commit();
+        	anotherSession.close();
                
         }
     	
-        catch(Exception e)
-        {
-        	
-            e.printStackTrace();
-            return false;
-        }
+    	 catch(HibernateException e)
+         {
+ 			logger.info("MySQL Exception: "+ e.toString());  	
+             e.printStackTrace();
+             throw new CouponException("problem with adding a coupon");
+         }
         
         return true;
 
