@@ -36,7 +36,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 
 
 /**
- * Created by Livne Lang
+ * Created by Livne Lang & Yaron Israeli
  */
 public class MySQLCouponsDAO implements ICouponsDAO
 {
@@ -81,6 +81,7 @@ public class MySQLCouponsDAO implements ICouponsDAO
 
     /**
      * Hibernate getCoupons
+     * Get Back updated Coupons
      */
     public Collection<Coupon> getCoupons() throws CouponException 
     {
@@ -109,6 +110,7 @@ public class MySQLCouponsDAO implements ICouponsDAO
 				System.out.println(e.toString());
 				logger.info("MySQL Exception: "+ e.toString());  	
 				e.printStackTrace();
+	            throw new CouponException("problem with Getting a coupon");
 			}
     		
     			// creating DateManager instance 
@@ -117,6 +119,45 @@ public class MySQLCouponsDAO implements ICouponsDAO
     			coupon_array = da.validatedCoupons(coupon_array);
     			return coupon_array;
     }
+    
+    /**
+     * Hibernate getCoupons
+     * Get Back updated Coupons
+     * Generally Uses Only Admin
+     */
+    public Collection<Coupon> getAllCoupons() throws CouponException 
+    {
+    	
+    			ArrayList<Coupon> coupon_array = new ArrayList<Coupon>();
+    		try {	
+    			//creating factory for getting sessions
+    			SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
+   
+    			//creating a new session for getting all products
+    			Session anotherSession = factory.openSession();
+    			anotherSession.beginTransaction();
+    			List<Coupon> products = anotherSession.createQuery("from Coupon").list();
+    			System.out.println("There are " + products.size() + " product(s)");
+    			Iterator i = products.iterator();
+    			while(i.hasNext()) 
+    			{
+    				//System.out.println(i.next());
+    				Coupon c = (Coupon) i.next();
+    				coupon_array.add(c);
+    				coupons.put(c.getId(),c);
+    			}
+    			anotherSession.close();
+    		}
+    		catch (HibernateException e) {
+				System.out.println(e.toString());
+				logger.info("MySQL Exception: "+ e.toString());  	
+				e.printStackTrace();
+	            throw new CouponException("problem with adding a coupon");
+			}
+    			// get All Coupons
+    			return coupon_array;
+    }
+    
     
     
     /**
@@ -153,6 +194,7 @@ public class MySQLCouponsDAO implements ICouponsDAO
     				System.out.println(e.toString());
     				logger.info("MySQL Exception: "+ e.toString());  	
     				e.printStackTrace();
+    	            throw new CouponException("problem with adding a coupon");
     			}
 				// returning the category coupons
     			return products;
@@ -195,16 +237,17 @@ public class MySQLCouponsDAO implements ICouponsDAO
     public Coupon getCoupon(int id) throws CouponException
     {
     	Coupon c1=null;
-    	//creating factory for getting sessions
-		SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
-		//creating a new session for getting all products
-		Session anotherSession = factory.openSession();
-		anotherSession.beginTransaction();
-        
-        try
+    	try
         {
-        	c1 = (Coupon) anotherSession.get(Coupon.class, id);
-        	    
+	    	//creating factory for getting sessions
+			SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
+			//creating a new session for getting all products
+			Session anotherSession = factory.openSession();
+			anotherSession.beginTransaction();
+	        
+	        
+	        	c1 = (Coupon) anotherSession.get(Coupon.class, id);
+	        	    
         }
 
         catch(HibernateException e)
@@ -226,22 +269,23 @@ public class MySQLCouponsDAO implements ICouponsDAO
     {
 
 		int succeed = 0;
-		
-		//creating factory for getting sessions
-		SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
-		//creating a new session for getting all products
-		Session anotherSession = factory.openSession();
-		anotherSession.beginTransaction();
 		Coupon c2 = null;
-		
-			try
-			{
+		Session anotherSession=null;
+		try
+		{
+				//creating factory for getting sessions
+				SessionFactory factory = new AnnotationConfiguration().configure().buildSessionFactory();
+				//creating a new session for getting all products
+				anotherSession = factory.openSession();
+				anotherSession.beginTransaction();
+			
 				//Retrieve detailed Coupon
 				c2 = (Coupon) anotherSession.get(Coupon.class, id);
 				//Add delete to session
 				anotherSession.delete(c2);
 				// Commit The Session
 				anotherSession.getTransaction().commit();
+				succeed = 1;
 				
 			}
 			catch (HibernateException e)
@@ -260,6 +304,7 @@ public class MySQLCouponsDAO implements ICouponsDAO
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+	            throw new CouponException("problem with deleting coupon");
 			}
 			finally
 			{
@@ -306,7 +351,6 @@ public class MySQLCouponsDAO implements ICouponsDAO
     	
     	 catch(HibernateException e)
          {
- 			logger.info("MySQL Exception: "+ e.toString());  	
              e.printStackTrace();
              throw new CouponException("problem with adding a coupon");
          }

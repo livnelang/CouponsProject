@@ -12,9 +12,9 @@
     <!-- Bootstrap-CSS & General CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <script src="./js/jquery-2.1.1.min.js"></script>
+    <script src="../js/jquery-2.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="./js/admin_js.js"></script>
+    <script src="../js/admin_js.js"></script>
   </head>
   <body>
   
@@ -22,7 +22,7 @@
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
+      <a class="navbar-brand" href="/CouponsProject/controller/index">CouponsProject</a>
    </div>
 
       <ul class="nav navbar-nav">
@@ -30,14 +30,8 @@
          <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
          <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
-          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          <li><button onClick="location.href='../controller/index'" class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
-          <!--  <ul class="nav navbar-nav navbar-right">
-          <li><p class="navbar-text">2014 Java EE Project</p></li>
-          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
-          
-          </ul>	
-          -->
 
 </nav>	
 </header>
@@ -47,18 +41,6 @@
   <div class="panel-heading">
   	<ul class="admin-ul">
     	<li>Add Coupon</li>
-    	<li class="dropdown pull-right"> 
-                <div class="btn-group">
-			    <button class="btn btn-primary">Action</button>
-			    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    <span class="caret"></span>
-			    </button>
-			    <ul class="dropdown-menu">
-			    <li><a href="../addcoupon.jsp">Add Coupon</a></li>
-			    <li><a href="#">Add business</a></li>
-			    <li><a href="#">Change Password</a></li>
-			    </ul>
-			    </div>
             </ul>
  	</div>
 	<div class="panel-body">
@@ -112,29 +94,5 @@
 </div>
 
 </div>
-			
-			<%
-			boolean added = false;
-			try{		
-			added = (boolean)request.getAttribute("addcoupon");
-			}
-			
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-			if(added)
-			{
-				%>
-				<h1>coupon was added</h1>
-			<% 
-			}
-			else 
-			{
-				%>
-				<h1>coupon wasnt added</h1>
-				<% 
-			}
-			
-			%>
   </body>
 </html>

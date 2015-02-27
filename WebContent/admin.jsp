@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="../js/admin_js.js"></script>
   </head>
@@ -23,7 +24,7 @@
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
+      <a class="navbar-brand" href="../controller/index">CouponsProject</a>
    </div>
 
       <ul class="nav navbar-nav">
@@ -31,7 +32,7 @@
          <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
          <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
-          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          <li><button onClick="location.href='../controller/index'" class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
           <!--  <ul class="nav navbar-nav navbar-right">
           <li><p class="navbar-text">2014 Java EE Project</p></li>
@@ -63,18 +64,19 @@
 			    </button>
 			    <ul class="dropdown-menu">
 			    <li><a href="/CouponsProject/adminController/addpage">Add Coupon</a></li>
-			    <li><a href="#">Add business</a></li>
-			    <li><a href="#">Change Password</a></li>
+			    <li><a href="/CouponsProject/adminController/logout">Log Out</a></li> 
 			    </ul>
 			    </div>
         </li>
     </ul>
   </div>
    <table class="table">
-      <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th class="col-sm-1"><th class="col-sm-1">Description</th><th class="col-sm-3">Expiration</th><th class="col-sm-1">Edit</th><th class="col-sm-1">Delete</th>
+   <tr>
+      <th class="col-sm-1">Id</th><th  class="col-sm-1">Name</th><th class="col-sm-1">Description</th><th class="col-sm-3">Expiration</th><th class="col-sm-1">Edit</th><th class="col-sm-1">Delete</th>
+      </tr>
       <% 
       	MySQLCouponsDAO myDAo = (MySQLCouponsDAO)request.getAttribute("inventory");
-      	Collection coupons = myDAo.getInstance().getCoupons();
+      	Collection coupons = myDAo.getInstance().getAllCoupons();
       	if(coupons ==null){
       		out.write("No Coupons Arrived");
       	}

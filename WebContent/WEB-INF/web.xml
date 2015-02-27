@@ -15,6 +15,16 @@
   <url-pattern>/controller/*</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  <servlet-name>admin</servlet-name>
+  <servlet-class>il.ac.shenkar.samples.controller.adminController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>admin</servlet-name>
+  <url-pattern>/adminController/*</url-pattern>
+  </servlet-mapping>
+  
   
   <filter>
     <filter-name>myfilter</filter-name>
@@ -23,6 +33,11 @@
 	<filter-mapping>
       <filter-name>myfilter</filter-name>
       <servlet-name>control</servlet-name>
+   </filter-mapping>
+   
+   <filter-mapping>
+      <filter-name>myfilter</filter-name>
+      <servlet-name>admin</servlet-name>
    </filter-mapping>
   
   	<listener>

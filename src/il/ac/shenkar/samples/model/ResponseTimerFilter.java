@@ -56,7 +56,6 @@ public class ResponseTimerFilter implements Filter {
 	    long startTime = System.currentTimeMillis();
 	    chain.doFilter(request, response);	    
 	    long elapsed = System.currentTimeMillis() - startTime;
-	    System.out.println("time elapsed: "+elapsed);
 	    out.write("<div class=\"col-xs-2 alert alert-dismissable alert-info col\">"+
 	  "<strong>Response time: "+elapsed+" ms</strong> <br> </div>");
 	    out.flush();

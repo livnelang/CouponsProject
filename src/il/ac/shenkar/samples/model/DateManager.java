@@ -8,6 +8,10 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
+ * Created by Livne Lang & Yaron Israeli
+ */
+
+/**
  * DateManager Class
  * uses to compare dates
  * matching between coupon date

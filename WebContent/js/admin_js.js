@@ -57,10 +57,12 @@ function isDate(value) {
 			if( isInt(str.substring(5,6)) ) {
 				if(str.charAt(7) == '-' ) {
 					if(isInt(str.substring(8,9)) ) {
-						if(isInt(str.substring(11,12)) ) {
-							if(str.charAt(13) == ':' ) {
-								if(isInt(str.substring(14,15)) ) {
-									return true;
+						if(str.charAt(10) == ' ' ) {
+							if(isInt(str.substring(11,12)) ) {
+								if(str.charAt(13) == ':' ) {
+									if(isInt(str.substring(14,15)) ) {
+										return true;
+										}
 								}
 							}
 						}
@@ -79,27 +81,30 @@ function isDate(value) {
 
  // Validate AddCoupon Form Submit 
 function addCouponValidateForm() {
-	var id,name,des,date;
-	id = document.forms["addForm"]["c_id"].value;
-	name = document.forms["addForm"]["c_name"].value;
-	des = document.forms["addForm"]["c_des"].value;
-	date = document.forms["addForm"]["exp_date"].value;
-	if ( isInt(id) ) {
-		if (isString(name)) {
-			if (isString(des)) {
-				if(isDate(date)) {
-					return true;
-				}
-			}
-		}
+	var date;
+	var edit_form = document.forms[0];
+	date = edit_form.elements["exp_date"].value;
+	if(isDate(date)) {
+		return true;
 	}
+	else {
+		window.alert(" Enter Correct Date Format \n  yyyy-mm-dd hh:hh");
 		return false;
-	}
-
+		}
+}
 
 // Validate editCoupon Form Submit 
 function editCouponValidateForm() {
-	var a,b,c,d;
+	var date;
+	var edit_form = document.forms[0];
+	date = edit_form.elements["exp_date"].value;
+	if(isDate(date)) {
+		return true;
+	}
+	else {
+		window.alert(" Enter Correct Date Format \n  yyyy-mm-dd hh:hh");
+		return false;
+	}
 	
 	
 	

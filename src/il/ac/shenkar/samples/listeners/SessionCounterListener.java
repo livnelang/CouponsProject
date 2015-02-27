@@ -1,4 +1,5 @@
 package il.ac.shenkar.samples.listeners;
+import il.ac.shenkar.samples.controller.InventoryController;
 import il.ac.shenkar.samples.model.Coupon;
 import il.ac.shenkar.samples.model.MySQLCouponsDAO;
 
@@ -7,6 +8,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+
+import org.apache.log4j.Logger;
 
 /**
  * Session Counter Class
@@ -19,6 +22,8 @@ public class SessionCounterListener implements HttpSessionListener {
 	//private static SessionCounterListener instance;
 	private static int totalActiveSessions;
 	private static HashMap<String, HttpSession> activesessions = new HashMap<String, HttpSession>();
+	static Logger logger = Logger.getLogger(SessionCounterListener.class);  		  // Main Logger
+
 	
 	
 	public SessionCounterListener() { }
@@ -50,6 +55,7 @@ public class SessionCounterListener implements HttpSessionListener {
 	  public void sessionCreated(HttpSessionEvent incoming_session) {
 		totalActiveSessions++;
 		activesessions.put(incoming_session.getSession().getId(), incoming_session.getSession());
+		logger.debug("Session Id: "+incoming_session.getSession().getId() +" Created");
 		System.out.println("sessionCreated - add one session into counter");
 	  }
 	 
@@ -60,6 +66,7 @@ public class SessionCounterListener implements HttpSessionListener {
 	  @Override
 	  public void sessionDestroyed(HttpSessionEvent arg0) {
 		totalActiveSessions--;
+		logger.debug("Session Id: "+arg0.getSession().getId() +" Deleted");
 		activesessions.remove(arg0.getSession().getId());
 		System.out.println("sessionDestroyed - deduct one session from counter");
 	  }	

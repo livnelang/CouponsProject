@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * Created by Livne Lang & Yaron Israeli
+ */
+
+/**
  * Represents the MD5 Logic Controller
  * using for getting DB pass
  * Hashing password

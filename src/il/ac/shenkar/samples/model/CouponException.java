@@ -1,7 +1,7 @@
 package il.ac.shenkar.samples.model;
 
 /**
- * Created by Livne Lang
+ * Created by Created by Livne Lang & Yaron Israeli
  */
 public class CouponException extends Exception
 {

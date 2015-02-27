@@ -20,7 +20,7 @@
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
+      <a class="navbar-brand" href="controller/index">CouponsProject</a>
    </div>
 
       <ul class="nav navbar-nav">
@@ -28,7 +28,7 @@
          <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
          <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
-          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          <li><button onClick="location.href='./controller/index'" class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
 </nav>	
 	</header>

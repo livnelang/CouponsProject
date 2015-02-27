@@ -26,7 +26,7 @@
 <!-- The Navigation Bar -->
 <nav class="navbar navbar-default" role="navigation">
    <div class="navbar-header">
-      <a class="navbar-brand" href="/CouponsProject/index.jsp">CouponsProject</a>
+      <a class="navbar-brand" href="index">CouponsProject</a>
    </div>
 
       <ul class="nav navbar-nav">
@@ -34,7 +34,7 @@
          <li><a href="/CouponsProject/controller/mycartentry">My Coupons</a></li>
          <li><a href="/CouponsProject/controller/admin">Connect As Admin</a></li>
           <li><p class="navbar-text right_li">2014 Java EE Project</p></li>	
-          <li><button class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
+          <li><button onClick="location.href='index'" class="white navbar-text" type="button"><span class="glyphicon glyphicon-home"></span></button></li>
           </ul>
 </nav>	
 </header>		
@@ -44,18 +44,6 @@
   <div class="panel-heading">
     <ul class="admin-ul">
     	<li>My Shopping Cart</li>
-    	<li class="dropdown pull-right"> 
-                <div class="btn-group">
-			    <button class="btn btn-primary">Select Category</button>
-			    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-			    <span class="caret"></span>
-			    </button>
-			    <ul class="dropdown-menu">
-			    <c:forEach var="cat" items="${catgs}">
-			    <li><a href="/CouponsProject/controller/category?catgry=${cat}">${cat}</a></li>	
-			    </c:forEach>
-			    </ul>
-			    </div>
             </ul>
   </div>
    <table class="table">

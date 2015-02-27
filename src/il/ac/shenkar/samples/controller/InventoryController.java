@@ -60,9 +60,9 @@ public class InventoryController extends HttpServlet {
     public void init() {
     	try {
 			getServletContext().setAttribute("inventory", MySQLCouponsDAO.getInstance());
-			logger.info(new Date().toString());
-			logger.info("InventoryController In Construction ..");
-			logger.info(" ");
+			logger.debug(new Date().toString());
+			logger.debug("InventoryController In Construction ..");
+			logger.debug(" ");
 			} 
     	catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -77,17 +77,26 @@ public class InventoryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getPathInfo();
 		if (path !=null  ) {
-		logger.info("http GetMethod - Referer Is :"+ request.getHeader("referer"));
+		logger.debug("http GetMethod - Referer Is :"+ request.getHeader("referer"));
 		}
 		RequestDispatcher dispatcher = null;
 
 		count++;
 		
+		/**
+		 * Direct To Index.jsp
+		 */	
+		if(path.endsWith("index"))
+		{
+			dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+			dispatcher.include(request, response);
+		}
+		
 		
 		/**
 		 * Display Available Coupons
 		 */	
-		if(path.endsWith("coupons"))
+		else if(path.endsWith("coupons"))
 		{
 			try {
 				MySQLCouponsDAO inventory =  (MySQLCouponsDAO) getServletContext().getAttribute("inventory");
@@ -160,20 +169,26 @@ public class InventoryController extends HttpServlet {
 				// check to see whether we put catgs for the user
 				if ( session.getAttribute("catgs")==null ) {
 					session.setAttribute("catgs", inventory.getCategories());
+					logger.debug("Session Id "+session.getId()+" Created A New ShoopingCart");
 				}
 				//adding the product to the shopping cart
 				ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 				
 					cart.addShoppingCartLine(inventory.getCoupon(productId));
+					logger.debug("Session Id "+session.getId()+" Added A New Coupon");
 					
-			} catch (CouponException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+					// Going to turn it to mycoupons.jsp page and show purchased coupons
+					dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
+					dispatcher.include(request, response);
+					
 			}
 			
-			// Going to turn it to mycoupons.jsp page and show purchased coupons
-			dispatcher = getServletContext().getRequestDispatcher("/mycoupons.jsp");
-			dispatcher.include(request, response);
+			catch (CouponException e) {
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+				dispatcher.forward(request, response);
+				e.printStackTrace();
+			}
+
 		}
 		
 		/**
@@ -230,7 +245,7 @@ public class InventoryController extends HttpServlet {
 				admin_connected = (boolean) session.getAttribute("admin_log");
 				if(admin_connected){
 					dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
-					dispatcher.forward(request, response);
+					dispatcher.include(request, response);
 				}
 					else {
 						dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
@@ -240,7 +255,7 @@ public class InventoryController extends HttpServlet {
 			
 			catch (Exception e) {
 				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.include(request, response);
 				e.printStackTrace();
 			}
 		}
@@ -286,7 +301,8 @@ public class InventoryController extends HttpServlet {
 				dispatcher.include(request, response);
 			}
 			catch (CouponException e) {
-				// TODO Auto-generated catch block
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+				dispatcher.include(request, response);
 				e.printStackTrace();
 			}
 			

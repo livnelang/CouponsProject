@@ -2,7 +2,7 @@ package il.ac.shenkar.samples.model;
 import java.util.*;
 
 /**
- * Created by Livne Lang
+ * Created by Livne Lang & Yaron Israeli
  */
 
 /**

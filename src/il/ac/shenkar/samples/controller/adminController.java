@@ -19,20 +19,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
+
+
 import org.apache.log4j.Logger;
 
 /**
  * Servlet implementation class adminController
  */
-@WebServlet("/adminController/*")
+//@WebServlet("/adminController/*")
 public class adminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Logger logger=null;
+	static Logger logger = Logger.getLogger(adminController.class);  		  // Main Logger
 	private boolean admincredit = false;
 
-       
+       			
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -44,9 +44,7 @@ public class adminController extends HttpServlet {
     public void init() {
     	try {
     		getServletContext().setAttribute("inventory", MySQLCouponsDAO.getInstance());
-			logger = Logger.getRootLogger();
-			BasicConfigurator.configure();
-			logger.setLevel(Level.OFF);			} 
+		} 
     	catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +75,7 @@ public class adminController extends HttpServlet {
 				}
 					else {
 						dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-						dispatcher.forward(request, response);
+						dispatcher.include(request, response);
 					}
 					
 				}
@@ -87,6 +85,32 @@ public class adminController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+		}
+		
+		
+		/**
+		 * If Admin clicked Log Out from his Control Panel
+		 * well set admincredit to false,
+		 * and the session variable also
+		 * and redirect him to home page
+		 */
+		if(path.endsWith("logout"))
+		{
+			try {
+				HttpSession session = request.getSession();
+				if(admincredit) {
+					admincredit = false;
+					session.setAttribute("admin_log", false);
+					dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+					dispatcher.forward(request, response);
+					}
+			}
+				
+			
+				catch (Exception e) {
+					dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+					dispatcher.forward(request, response);
+				}
 		}
 		
 		/**
@@ -125,11 +149,13 @@ public class adminController extends HttpServlet {
 		 */
 		else if(path.endsWith("deletecoupon"))
 		{
+			HttpSession session = request.getSession();
 			try {
 				// checks whether the admin is logged or not
 				if(admincredit){
 					int coupon_id = Integer.parseInt(request.getParameter("c_id"));
 					if(MySQLCouponsDAO.getInstance().deleteCoupon(coupon_id)) {
+						logger.info("Coupon id: "+coupon_id+" was deleted !");
 					}
 					dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
 					dispatcher.forward(request, response);
@@ -140,11 +166,19 @@ public class adminController extends HttpServlet {
 					}
 				}
 			
-			catch (Exception e) {
-				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
+			catch (CouponException e) {
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
 				dispatcher.forward(request, response);
 				e.printStackTrace();
 			}
+			
+			catch (Exception e) {
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+				dispatcher.forward(request, response);
+				e.printStackTrace();
+			}
+			
+			
 		}
 		
 		
@@ -210,27 +244,31 @@ public class adminController extends HttpServlet {
 				else {
 					// set the request page a false variable attempt
 					// & redirect to try again
+					logger.debug("user has tried to log as admin !");
 					request.setAttribute("login_failed", -1);
 					dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-					dispatcher.forward(request, response);
+					dispatcher.include(request, response);
 				}
 			
 			// if return positive --> then redirect to AdminPage
 			if(admincredit) {
+				logger.debug(new Date().toString());
+				logger.debug("admin has logged in !");
 				HttpSession session = request.getSession();
 				// set administration credit with true boolean variable
 				session.setAttribute("admin_log", true);
 				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.include(request, response);
 				}
 			
 			// if return false --> then redirect to errorPage
 			else {
 				// set the request page a false variable attempt
 				// & redirect to try again
+				logger.debug("user has tried to log as admin !");
 				request.setAttribute("login_failed", -1);
 				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.include(request, response);
 			}
 			
 			}
@@ -238,6 +276,8 @@ public class adminController extends HttpServlet {
 				// set the request page a false variable attempt
 				// & redirect to try again
 				request.setAttribute("login_failed", -1);
+				e.printStackTrace();
+				System.out.println(e.toString());
 				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
 				dispatcher.include(request, response);
 			}
@@ -260,7 +300,7 @@ public class adminController extends HttpServlet {
 				// checks whether the admin is logged or not
 				if ( !admincredit ) {
 					dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-					dispatcher.forward(request, response);
+					dispatcher.include(request, response);
 				}	
 				int _id = Integer.parseInt(request.getParameter("c_id"));
 				String name = request.getParameter("c_name");
@@ -277,7 +317,7 @@ public class adminController extends HttpServlet {
 					logger.info("Coupon id: "+request.getParameter("c_id")+" was added !");
 				}
 				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.include(request, response);
 			}
 			
 			catch (ParseException e1) {
@@ -311,7 +351,7 @@ public class adminController extends HttpServlet {
 				// checks whether the admin is logged or not
 				if ( !admincredit ) {
 					dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-					dispatcher.forward(request, response);
+					dispatcher.include(request, response);
 				}	
 				int _id =  (int) session.getAttribute("coupon_for_edit");
 				String name = request.getParameter("c_name");
@@ -319,12 +359,13 @@ public class adminController extends HttpServlet {
 				String catg = request.getParameter("c_cat");
 				int ltude =   Integer.parseInt(request.getParameter("c_ltude"));
 				int latude =  Integer.parseInt(request.getParameter("c_latude"));
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				Date d = simpleDateFormat.parse(request.getParameter("exp_date"));
 				c1 = new Coupon(_id,name,desc,catg,ltude,latude,d);
 			}
 			catch (ParseException e1) {
-				// TODO Auto-generated catch block
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+				dispatcher.forward(request, response);
 				e1.printStackTrace();
 			}
 			
@@ -335,9 +376,10 @@ public class adminController extends HttpServlet {
 					logger.info("Coupon id: "+(int) session.getAttribute("coupon_for_edit")+" was updated !");
 				}
 				dispatcher = getServletContext().getRequestDispatcher("/admin.jsp");
-				dispatcher.forward(request, response);
+				dispatcher.forward(request, response);   
 			} catch (CouponException e) {
-				// TODO Auto-generated catch block
+				dispatcher = getServletContext().getRequestDispatcher("/404-page.jsp");
+				dispatcher.forward(request, response);
 				e.printStackTrace();
 			}
 			
