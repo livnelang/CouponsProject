@@ -247,7 +247,7 @@ public class adminController extends HttpServlet {
 					logger.debug("user has tried to log as admin !");
 					request.setAttribute("login_failed", -1);
 					dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-					dispatcher.include(request, response);
+					dispatcher.forward(request, response);
 				}
 			
 			// if return positive --> then redirect to AdminPage
@@ -268,7 +268,7 @@ public class adminController extends HttpServlet {
 				logger.debug("user has tried to log as admin !");
 				request.setAttribute("login_failed", -1);
 				dispatcher = getServletContext().getRequestDispatcher("/adminentry.jsp");
-				dispatcher.include(request, response);
+				dispatcher.forward(request, response);
 			}
 			
 			}
@@ -308,7 +308,7 @@ public class adminController extends HttpServlet {
 				String catg = request.getParameter("c_cat");
 				int ltude =   Integer.parseInt(request.getParameter("c_ltude"));
 				int latude =  Integer.parseInt(request.getParameter("c_latude"));
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				Date d = simpleDateFormat.parse(request.getParameter("exp_date"));
 				c1 = new Coupon(_id,name,desc,catg,ltude,latude,d);
 				

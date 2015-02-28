@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2015 at 05:01 PM
+-- Generation Time: Feb 28, 2015 at 06:27 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -22,6 +22,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `livnedatabase`
 --
+
 -- --------------------------------------------------------
 
 --
@@ -36,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `coupons` (
   `longitude` int(11) NOT NULL,
   `latitude` int(11) NOT NULL,
   `expiration` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=659852 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=223577 ;
 
 --
 -- Dumping data for table `coupons`
@@ -51,54 +52,6 @@ INSERT INTO `coupons` (`id`, `name`, `description`, `category`, `longitude`, `la
 (9182, 'a', 'sas', 'Music', 34, 43, '1995-01-24 10:31:00'),
 (34324, 'asasa', 'ad', 'TV', 324, 2, '1995-01-24 10:30:00'),
 (223576, 'Bob', 'Builder', 'CARS', 5, 5, '2015-03-01 15:50:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `livnecoupons`
---
-
-CREATE TABLE IF NOT EXISTS `livnecoupons` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `livnecoupons`
---
-
-INSERT INTO `livnecoupons` (`id`, `name`, `description`) VALUES
-(12544, 'shenkar gaga pizzzza', 'get 2 pizpaz for 1'),
-(12545, 'this', 'was updated '),
-(12543, 'hit las falafelia', 'get 2 falalfes for 10shekels'),
-(12543, 'hit las falafelia', 'get 2 falalfes for 10shekels'),
-(12543, 'hit las falafelia', 'get 2 falalfes for 10shekels'),
-(12543, 'hit las falafelia', 'get 2 falalfes for 10shekels'),
-(12543, 'hit las falafelia', 'get 2 falalfes for 10shekels'),
-(12543, 'hit las falafelia', 'get 2 falalfes for 10shekels'),
-(12543, 'hit las falafelia', 'get 2 falalfes for 10shekels');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `products`
---
-
-CREATE TABLE IF NOT EXISTS `products` (
-  `ID` int(11) NOT NULL,
-  `NAME` varchar(255) DEFAULT NULL,
-  `PRICE` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`ID`, `NAME`, `PRICE`) VALUES
-(1, 'tv', 20),
-(2, 'pc', 30),
-(3, 'tablet', 50);
 
 -- --------------------------------------------------------
 
@@ -129,12 +82,6 @@ ALTER TABLE `coupons`
  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `products`
---
-ALTER TABLE `products`
- ADD PRIMARY KEY (`ID`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -142,7 +89,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=659852;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=223577;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
